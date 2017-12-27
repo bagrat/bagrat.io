@@ -1,0 +1,17 @@
+@font-face {
+  font-family: Menlo;
+  src: url('../fonts/Menlo-Regular.ttf');
+}
+
+body {
+  background-color: #333333;
+  margin: 0;
+  font-family: Menlo;
+  font-size: 16pt;
+}
+
+/* div { */
+/*   border-style: solid; */
+/*   border-color: red; */
+/*   border-width: 2px; */
+/* } */

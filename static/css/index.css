@@ -1,0 +1,361 @@
+@keyframes fade {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+.root-desktop {
+  border-style: none;
+  display: none;
+}
+
+.root-mobile {
+  position: absolute;
+  border-style: none;
+  display: inline;
+}
+
+/*
+ * Info
+ */
+
+.info {
+  height: 80px;
+  width: 500px;
+  position: absolute;
+  left: 10vw;
+  top: 100px;
+}
+
+.info .name {
+  color: #89972E;
+  font-size: 40px;
+}
+
+.info .title {
+  color: #686868;
+  font-size: 20px;
+}
+
+/*
+ * Profiles
+ */
+
+.profiles {
+  height: 50px;
+  width: 500px;
+  position: absolute;
+  left: 10vw;
+  top: 200px;
+}
+
+.profiles .profile a {
+  text-decoration: none;
+}
+
+.profiles .profile a i {
+  color: #89972E;
+  font-size: 40px;
+  padding: none;
+  margin: none;
+}
+
+.profiles .profile {
+  height: 60px;
+  width: 50px;
+  display: inline-block;
+}
+
+.profiles .profile .tip {
+  margin-top: 10px;
+  display: inline-block;
+  padding: 3px;
+  border-radius: 2px;
+  white-space: nowrap;
+  font-size: 11px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s linear 300ms, opacity 300ms;
+}
+
+#resume-icon:hover + #resume-tip {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0s linear 0s, opacity 300ms;
+}
+
+#email-icon:hover + #email-tip {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0s linear 0s, opacity 300ms;
+}
+
+#github-icon:hover + #github-tip {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0s linear 0s, opacity 300ms;
+}
+
+#stack-overflow-icon:hover + #stack-overflow-tip {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0s linear 0s, opacity 300ms;
+}
+
+#twitter-icon:hover + #twitter-tip {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0s linear 0s, opacity 300ms;
+}
+
+#linkedin-icon:hover + #linkedin-tip {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0s linear 0s, opacity 300ms;
+}
+
+/*
+ * Timeline
+ */
+
+.timeline {
+  border-color: #448ACC;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 2px;
+
+  height: 130px;
+  width: 800px;
+
+  position: absolute;
+  left: 10vw;
+  top: 300px;
+}
+
+.timeline .container {
+  border-color: red;
+  border-style: none;
+  border-width: 0px;
+  height: 35%;
+  width: 100%;
+}
+
+.timeline .experience {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+
+.timeline .experience .item {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #448acc;
+  background-color: #333333;
+  position: absolute;
+  height: 100%;
+  top: -1px;
+}
+
+.timeline .experience .item .tech {
+  border-style: none;
+  border-width: 0px;
+  color: #686868;
+  position: absolute;
+  font-size: 10px;
+  text-align: center;
+  top: 62%;
+  width: 100%;
+}
+
+.timeline .experience .item .company {
+  border-style: none;
+  border-width: 0px;
+  position: absolute;
+  top: 23%;
+  text-align: center;
+  width: 100%;
+}
+
+.timeline .experience .item .company a {
+  color: #686868;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.timeline .education {
+  position: absolute;
+  left: 0px;
+  top: 65%;
+}
+
+.timeline .education .item {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #448acc;
+  background-color: #333333;
+  position: absolute;
+  top: 1px;
+  height: calc(100% - 2px);
+}
+
+.timeline .education .item .degree {
+  border-style: none;
+  border-width: 0px;
+  color: #686868;
+  position: absolute;
+  font-size: 12px;
+  text-align: center;
+  top: 25%;
+  width: 100%;
+}
+
+.timeline .education .item .univ {
+  border-style: none;
+  border-width: 0px;
+  position: absolute;
+  top: 60%;
+  text-align: center;
+  width: 100%;
+}
+
+.timeline .education .item .univ a {
+  color: #686868;
+  font-size: 8px;
+  text-decoration: none;
+}
+
+.timeline .scale {
+  border-color: #448ACC;
+  border-style: solid;
+  border-width: 1px;
+
+  height: 30%;
+  width: 100%;
+
+  position: absolute;
+  left: -1px;
+  top: 35%;
+}
+
+.timeline .scale .division {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #448ACC;
+  margin: 0px auto;
+
+  height: 100%;
+
+  position: absolute;
+  top: -1px;
+}
+
+.timeline .scale .division .year {
+  background-color: #333333;
+  border-style: none;
+
+  color: #448ACC;
+  font-size: 12px;
+  line-height: 20px;
+  text-align: center;
+
+  height: 50%;
+
+  position: absolute;
+  top: 26%;
+}
+
+.timeline div .tip {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #686868;
+  border-radius: 2px;
+
+  padding: 15px;
+  font-size: 14px;
+
+  width: 800px;
+
+  position: fixed;
+  top: 450px;
+
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s linear 300ms, opacity 300ms;
+}
+
+.timeline .experience .item:hover ~ #timeline_exp_tip {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0s linear 0s, opacity 300ms;
+}
+
+/*
+ * Mobile
+ */
+
+@media only screen and (min-width: 500px) {
+  .root-desktop {
+    width: 100vw;
+    overflow: hidden;
+    display: inline;
+  }
+  .root-mobile {
+    display: none;
+  }
+}
+
+.mobile.name {
+  position: fixed;
+  top: 10%;
+  left: 0px;
+  width: 100vw;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.mobile.title {
+  position: fixed;
+  top: 19%;
+  left: 0px;
+  width: 100vw;
+  font-size: 0.7em;
+  text-align: center;
+}
+
+.mobile.info {
+  position: fixed;
+  padding: 5%;
+  top: 40%;
+  left: 0px;
+  width: calc(100vw - 10%);
+  font-size: 0.5em;
+  text-align: center;
+}
+
+.mobile a {
+  text-decoration: none;
+}
+
+.mobile.call a {
+  color: green;
+}
+
+.mobile.email a {
+  color: blue;
+}
+
+.mobile.call {
+  position: fixed;
+  bottom: 5%;
+  left: 10%;
+  font-size: 5em;
+}
+
+.mobile.email {
+  position: fixed;
+  bottom: 5%;
+  right: 10%;
+  font-size: 5em;
+}

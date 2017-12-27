@@ -1,5 +1,105 @@
 <html>
-  <head></head>
-  <body>
+  <head>
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" type="text/css" href="static/css/index.css">
+    <link rel="stylesheet" type="text/css" href="static/css/common.css">
+    <script src="https://use.fontawesome.com/640bad0a2f.js"></script>
+    <script src="data.js"></script>
+    <script src="static/js/timeline.js"></script>
+  </head>
+  <body onload="render()">
+    <div class="root-desktop">
+      <div class="profiles">
+        <div class="profile">
+          <a id="resume-icon" href="#" target="_blank">
+            <i class="fa fa-file-text-o"></i>
+          </a>
+          <div id="resume-tip" class="tip">
+            Resume
+          </div>
+        </div>
+        <div class="profile">
+          <a id="email-icon" href="#" target="_blank">
+            <i class="fa fa-envelope-open-o" aria-hidden="true"></i>
+          </a>
+          <div id="email-tip" class="tip">
+            Email
+          </div>
+        </div>
+        <div class="profile">
+          <a id="github-icon" href="#" target="_blank">
+            <i class="fa fa-github"></i>
+          </a>
+          <div id="github-tip" class="tip">
+            Github
+          </div>
+        </div>
+        <div class="profile">
+          <a id="stack-overflow-icon" href="#" target="_blank">
+            <i class="fa fa-stack-overflow"></i>
+          </a>
+          <div id="stack-overflow-tip" class="tip">
+            Stack Overflow
+          </div>
+        </div>
+        <div class="profile">
+          <a id="twitter-icon" href="#" target="_blank">
+            <i class="fa fa-twitter"></i>
+          </a>
+          <div id="twitter-tip" class="tip">
+            Twitter
+          </div>
+        </div>
+        <div class="profile">
+          <a id="linkedin-icon" href="#" target="_blank">
+            <i class="fa fa-linkedin"></i>
+          </a>
+          <div id="linkedin-tip" class="tip">
+            LinkedIn
+          </div>
+        </div>
+      </div>
+      <div class="info">
+        <div class="name">Bagrat Aznauryan</div>
+        <div class="title">Software Engineer</div>
+      </div>
+      <div id="timeline" class="timeline">
+        <div id="timeline_exp" class="experience container">
+        
+          <div id="timeline_exp_tip" class="tip">
+
+          </div>
+        </div>
+        <div id="timeline_sc" class="scale">
+        
+        </div>
+        <div id="timeline_edu" class="education container">
+        
+        </div>
+      </div>
+    </div>
+    <div class="root-mobile">
+      <div class="mobile name">
+        Bagrat Aznauryan
+      </div>
+      <div class="mobile title">
+        Software Engineer
+      </div>
+
+      <div class="mobile info">
+        For more information, please rotate your devide.
+      </div>
+
+      <div class="mobile call">
+        <a href="tel:+37495224728">
+          <i class="fa fa-phone-square"></i>
+        </a>
+      </div>
+      <div class="mobile email">
+        <a href="mailto:contact@bagrat.io">
+          <i class="fa fa-envelope-square"></i>
+        </a>
+      </div>
+    </div>
   </body>
 </html>
