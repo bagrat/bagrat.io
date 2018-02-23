@@ -27,12 +27,13 @@
 }
 
 .info .name {
-  color: #89972E;
+  color: #c6c6c6;
+  font-weight: bold;
   font-size: 40px;
 }
 
 .info .title {
-  color: #686868;
+  color: #b0b0b0;
   font-size: 20px;
 }
 
@@ -52,8 +53,8 @@
   text-decoration: none;
 }
 
-.profiles .profile a i {
-  color: #89972E;
+.profiles .profile a {
+  color: #448ACC;
   font-size: 40px;
   padding: none;
   margin: none;
@@ -76,8 +77,10 @@
   border-width: 1px;
   border-color: black;
   visibility: hidden;
+  border-color: #448ACC;
   opacity: 0;
   transition: visibility 0s linear 300ms, opacity 300ms;
+  color: #b6b6b6;
 }
 
 #resume-icon:hover + #resume-tip {
@@ -158,10 +161,13 @@
   top: -1px;
 }
 
+.timeline, .timeline a {
+  color: #b0b0b0;
+}
+
 .timeline .experience .item .tech {
   border-style: none;
   border-width: 0px;
-  color: #686868;
   position: absolute;
   font-size: 10px;
   text-align: center;
@@ -179,7 +185,6 @@
 }
 
 .timeline .experience .item .company a {
-  color: #686868;
   font-size: 13px;
   text-decoration: none;
 }
@@ -203,7 +208,6 @@
 .timeline .education .item .degree {
   border-style: none;
   border-width: 0px;
-  color: #686868;
   position: absolute;
   font-size: 12px;
   text-align: center;
@@ -221,7 +225,6 @@
 }
 
 .timeline .education .item .univ a {
-  color: #686868;
   font-size: 8px;
   text-decoration: none;
 }
@@ -269,13 +272,13 @@
 .timeline div .tip {
   border-style: solid;
   border-width: 1px;
-  border-color: #686868;
+  border-color: #424242;
   border-radius: 2px;
 
   padding: 15px;
   font-size: 14px;
 
-  width: 800px;
+  width: 770px;
 
   position: fixed;
   top: 450px;
@@ -307,6 +310,7 @@
 }
 
 .mobile.name {
+  color: #c6c6c6;
   position: fixed;
   top: 10%;
   left: 0px;
@@ -316,6 +320,7 @@
 }
 
 .mobile.title {
+  color: #b0b0b0;
   position: fixed;
   top: 19%;
   left: 0px;
@@ -325,6 +330,7 @@
 }
 
 .mobile.info {
+  color: #b0b0b0;
   position: fixed;
   padding: 5%;
   top: 40%;
@@ -339,11 +345,11 @@
 }
 
 .mobile.call a {
-  color: green;
+  color: #89982e;
 }
 
 .mobile.email a {
-  color: blue;
+  color: #448ACC;
 }
 
 .mobile.call {

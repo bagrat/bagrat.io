@@ -1,17 +1,14 @@
-@font-face {
-  font-family: Menlo;
-  src: url('../fonts/Menlo-Regular.ttf');
-}
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
 
 body {
   background-color: #333333;
+  font-family: 'Montserrat', sans-serif;
   margin: 0;
-  font-family: Menlo;
   font-size: 16pt;
 }
 
 /* div { */
 /*   border-style: solid; */
 /*   border-color: red; */
-/*   border-width: 2px; */
+/*   border-width: 1px; */
 /* } */
