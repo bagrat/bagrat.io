@@ -1,0 +1,300 @@
+body {
+  color: #c6c6c6;
+}
+
+a {
+  color: #c6c6c6;
+  text-decoration: none;
+}
+
+.dl-button {
+  width: auto;
+  display: inline;
+  border-color: #b0b0b0;
+  border-radius: 5px;
+  position: absolute;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-style: solid;
+  border-width: 1px;
+  right: 21px;
+  margin-top: 35px;
+  margin-right: 0px;
+  font-size: 9pt;
+}
+
+.dl-button:hover {
+  background-color: #424242;
+}
+
+.resume {
+  width: 210mm;
+  margin: 0 auto;
+  position: relative;
+}
+
+.name {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  font-size: 28pt;
+  text-align: center;
+  font-weight: bold;
+}
+
+.column {
+  float: left;
+  overflow: none;
+}
+
+.column-right {
+  float: right;
+  overflow: none;
+}
+
+.content {
+  padding: 0;
+  padding-left: 17px;
+  padding-right: 17px;
+}
+
+.content .column.root-left {
+  width: 40%;
+  height: 100%;
+  display: inline;
+}
+
+.content .column-right.root-right {
+  width: 57%;
+  height: 100%;
+}
+
+.content:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.vline {
+  border-style: none;
+  border-width: 0px;
+  background-color: #448ACC;
+  height: 1px;
+  width: 100%;
+  margin-top: 3px;
+}
+
+/* Contact Info */
+.content .contact-info {
+  padding: 0;
+  padding-bottom: 5px;
+  margin: 0;
+  margin-top: 15px;
+  margin-bottom: 20px;
+  width: 100%;
+  border-color: #448ACC;
+  border-width: 1px;
+  border-style: solid;
+  /* background-color: gray; */
+  font-size: 8pt;
+}
+
+.content .contact-info p {
+  padding-top: 5px;
+  padding-left: 7px;
+  padding-bottom: 0px;
+  padding-right: 7px;
+  margin: 0;
+}
+/* **************** */
+
+
+/* General Formatting */
+.list {
+  width: 100%;
+  font-size: 8pt;
+}
+
+.list .item {
+  width: 100%;
+}
+
+.list .item .header {
+  width: 100%;
+}
+
+.list .item:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.grid {
+  width: 100%;
+  font-size: 8pt;
+}
+
+.heading {
+  margin-bottom: 7px;
+  margin-top: 10px;
+  font-size: 16pt;
+  color: #448ACC;
+  font-weight: bold;
+}
+/* **************** */
+
+
+/* Tech Info */
+.tech .grid .item {
+  display: inline-block;
+  background-color: #424242;
+  margin: 2px;
+  margin-left: 2px;
+  margin-right: 3px;
+  padding: 2px;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+/* **************** */
+
+
+/* Experience */
+.location {
+  float: right;
+}
+
+.experience .list .item {
+  padding-bottom: 26px;
+}
+
+.experience .list .item .title {
+  font-size: 10pt;
+  font-weight: bold;
+}
+
+.experience .list .item .range {
+  margin-top: 4px;
+}
+
+.experience .list .item .company {
+  margin-top: 2px;
+  font-size: 9pt;
+}
+
+.experience .list .item .location {
+  margin-top: 3px;
+}
+
+.experience .list .item .info {
+  margin-top: 2px;
+  display: inline-block;
+  font-size: 7pt;
+  font-style: italic;
+  color: #b0b0b0;
+}
+
+.experience .list .item .description {
+  margin-top: 7px;
+  display: inline-block;
+  font-size: 8.5pt;
+  text-align: justify;
+  text-justify: inter-word;
+}
+/* **************** */
+
+
+/* Education */
+.education .list .item .left {
+  width: 30%;
+}
+
+.education .heading {
+  margin-top: 15px;
+}
+
+.experience .list .item .left {
+  width: 65%;
+}
+
+.education .list .item {
+  padding-bottom: 7px;
+}
+
+.education .degree {
+  font-size: 10pt;
+  font-weight: bold;
+}
+/* **************** */
+
+/* Online Courses */
+.online .heading {
+  margin-top: 10px;
+}
+
+.online .list .item {
+  padding-bottom: 7px;
+}
+
+.online .course {
+  display: block;
+  font-size: 10pt;
+  font-weight: bold;
+}
+
+.online .provider {
+  display: block;
+  font-style: italic;
+}
+/* **************** */
+
+
+@page {
+  size: A4;
+  margin: 5px;
+}
+
+@media print {
+  html, body {
+    height: 90%;
+    color: black;
+  }
+
+  a, .heading {
+    color: black;
+  }
+
+  .content .contact-info {
+    background: none;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+  }
+
+  .tech .grid .item {
+    background-color: none;
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    margin-right: 2px;
+    margin-left: 1px
+  }
+
+  .name {
+    padding-top: 60px;
+    padding-bottom: 40px;
+  }
+
+  .dl-button {
+    visibility: hidden;
+  }
+
+  .vline {
+    background-color: black !important;
+
+    -webkit-print-color-adjust: exact; 
+  }
+tr.vendorListHeading {
+    background-color: #1a4567 !important;
+}}
+}
