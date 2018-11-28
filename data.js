@@ -69,7 +69,7 @@ var data = {
 			"url": "https://saucelabs.com",
 			"location": "San Francisco, CA, USA",
 			"info": "Working remotely from Yerevan, Armenia",
-			"description": "Develop and maintain the core services of Sauce Labs mainly using asyncronous Python deploying on Kubernetes. Participate in on-call rotation for prompt production troubleshooting. Contribute to the CI pipelines. Implemented caching and rate limiting for the API to unload the database. Set up monitoring of services for better insights into health and production issues, which significantly decreased the response/reaction time to alerts.",
+			"description": "Develop and maintain the core services of Sauce Labs mainly using asyncronous Python and Go deploying on Kubernetes. Participate in on-call rotation for prompt production troubleshooting. Contribute to the CI pipelines. Implemented caching and rate limiting for the API to unload the database. Set up monitoring of services for better insights into health and production issues, which significantly decreased the response/reaction time to alerts.",
 			"tech": "Python, Go"
 		},
 		{
