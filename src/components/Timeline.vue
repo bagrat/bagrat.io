@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import ScrollArea from './ScrollArea.vue'
+import DiscreteScrollArea from './DiscreteScrollArea.vue'
 
 const counter = ref(0)
 
@@ -23,7 +23,7 @@ function handleScroll(direction) {
         <div></div>
       </li>
     </ul>
-    <ScrollArea @discreteScroll="handleScroll"/>
+    <DiscreteScrollArea @discreteScroll="handleScroll"/>
   </div>
 </template>
 
