@@ -1,6 +1,11 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, defineProps } from 'vue'
 import DiscreteScrollArea from './DiscreteScrollArea.vue'
+import EventMarkers from './EventMarkers.vue'
+
+const { events } = defineProps({
+  events: Array,
+})
 
 const counter = ref(0)
 
@@ -18,11 +23,7 @@ function handleScroll(direction) {
   <span>Counter: {{ counter }}</span>
   <div id="timeline-container">
     <div id="timeline-axis"></div>
-    <ul id="events">
-      <li v-for="_ in 10">
-        <div></div>
-      </li>
-    </ul>
+    <EventMarkers :events="events"/>
     <DiscreteScrollArea @discreteScroll="handleScroll"/>
   </div>
 </template>
@@ -49,44 +50,5 @@ function handleScroll(direction) {
 
   position: absolute;
   z-index: -10;
-}
-
-ul#events {
-  position: absolute;
-  display: flex;
-  margin: 0 0 0 0;
-  padding: 0 0 0 0;
-  z-index: 0;
-
-  /* DEBUG */
-  /* border: dashed 1px black; */
-}
-
-ul#events > li {
-  list-style-type: none;
-
-  /* DEBUG */
-  padding-left: 30px;
-  /* border: dashed 1px black; */
-}
-
-ul#events > li > div {
-  /* min-width: 6px; */
-  /* width: 6px; */
-
-  /* min-height: 6px; */
-  /* height: 6px; */
-
-  /* border-radius: 3px; */
-
-  min-width: 2px;
-  width: 2px;
-  min-height: 6px;
-  height: 6px;
-
-  background-color: black;
-
-  /* margin-left: 10px; */
-  /* margin-right: 10px; */
 }
 </style>
