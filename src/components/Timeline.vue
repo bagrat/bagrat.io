@@ -30,11 +30,12 @@ function handleScroll(direction) {
 <style scoped>
 #timeline-container {
   /* position: relative; */
+  width: 100%;
 
-  max-height: 90vh;
+  /* max-height: 90vh; */
 
   /* DEBUG */
-  /* border: dashed 1px black; */
+  border: dashed 1px black;
 }
 
 #timeline-axis {
@@ -44,8 +45,8 @@ function handleScroll(direction) {
   min-height: 2px;
   height: 4px;
 
-  width: 1000px;
-  min-width: 1000px;
+  width: 100%;
+  /* min-width: 100vw; */
 
   position: absolute;
   z-index: -10;

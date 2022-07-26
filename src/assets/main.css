@@ -1,12 +1,13 @@
 @import "./base.css";
 
-/* #app { */
-/*   max-width: 1280px; */
-/*   margin: 0 auto; */
-/*   padding: 2rem; */
+#app {
+  /* max-width: 1280px; */
+  /* margin: 0 auto; */
+  /* padding: 2rem; */
 
-/*   font-weight: normal; */
-/* } */
+  /* font-weight: normal; */
+  width: 100%;
+}
 
 /* a, */
 /* .green { */

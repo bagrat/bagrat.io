@@ -61,8 +61,10 @@
 /* } */
 
 body {
-  min-height: 100%;
+  /* min-height: 100%; */
+  /* min-width: 100%; */
 /*   color: var(--color-text); */
+  width: 100%;
   background: var(--color-main-background);
   font-family: 'Fira Code', sans-serif;
   margin: 0 0 0 0;

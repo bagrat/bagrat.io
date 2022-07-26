@@ -1,11 +1,9 @@
 <script setup>
-import { defineProps } from 'vue'
+import { onMounted, onUnmounted, defineProps, ref, computed } from 'vue'
 
 const { events } = defineProps({
   events: Array,
 })
-
-const spacingMultiplier = 2;
 
 function getPreciseDelta(event, nextEvent) {
   if (event.year === nextEvent.year) {
@@ -34,13 +32,32 @@ function getEventsWithDeltas(events) {
   })
 }
 
-const eventsWithDeltas = getEventsWithDeltas(events)
+const windowWidth = ref(window.innerWidth)
+console.log(windowWidth)
+onMounted(() => {
+    window.addEventListener('resize', () => {windowWidth.value = window.innerWidth})
+})
+onUnmounted(() => {
+    window.removeEventListener('resize', () => {windowWidth.value = window.innerWidth})
+})
+
+const totalMonths = getPreciseDelta(events[0], events[events.length - 1])
+const spacingMultiplier = computed(() => { return (windowWidth.value - 12 * events.length) / totalMonths })
+
+const eventsWithDeltas = getEventsWithDeltas(events).map((eventWithDelta) => {
+  return {
+    ...eventWithDelta,
+    marginLeft: computed(() => {
+      return eventWithDelta.delta * spacingMultiplier.value
+    }),
+  }
+})
 </script>
 
 <template>
   <ul id="events">
     <template v-for="eventMarker in eventsWithDeltas">
-      <li :style="{'margin-left': `${eventMarker.delta * spacingMultiplier}px`}">
+      <li :style="{'margin-left': `${eventMarker.marginLeft.value}px`}">
         <div></div>
         <span>{{ eventMarker.year }}</span>
       </li>
@@ -55,7 +72,7 @@ ul#events {
   margin: 0 0 0 0;
   padding: 0 0 0 0;
   z-index: 0;
-  padding-left: 30px;
+  padding-left: 0px;
 
   /* DEBUG */
   /* border: dashed 1px black; */
@@ -89,5 +106,11 @@ ul#events > li > div {
 
   /* margin-top: 2px; */
   font-size: 8px;
+}
+
+ul#events > li > span {
+  /* DEBUG */
+
+  font-size: 5px;
 }
 </style>
