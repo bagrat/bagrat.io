@@ -1,8 +1,9 @@
 <script setup>
-import { onMounted, onUnmounted, defineProps, ref, computed } from 'vue'
+import { onMounted, onUnmounted, onUpdated, defineProps, ref, computed } from 'vue'
 
-const { events } = defineProps({
+const { events, height } = defineProps({
   events: Array,
+  height: Number,
 })
 
 function getPreciseDelta(event, nextEvent) {
@@ -32,23 +33,45 @@ function getEventsWithDeltas(events) {
   })
 }
 
-const windowWidth = ref(window.innerWidth)
+const width = ref(0)
+const markersElement = ref(null)
+
+function calculateWidth() {
+  width.value = markersElement.value.clientWidth
+}
 
 onMounted(() => {
-    window.addEventListener('resize', () => {windowWidth.value = window.innerWidth})
+  calculateWidth()
+  window.addEventListener('resize', calculateWidth)
+})
+
+onUpdated(() => {
+  calculateWidth()
 })
 
 onUnmounted(() => {
-    window.removeEventListener('resize', () => {windowWidth.value = window.innerWidth})
+  window.removeEventListener('resize', calculateWidth)
 })
 
+const markerDiameter = height;
+
+const preludeHeight = height / 3;
+const preludeMarginTop = markerDiameter / 3;
+
+const scaleFactor = 1.5
+const markerPreScaleDiameter = markerDiameter / scaleFactor
+const markerPostScaleDisplacement = (markerDiameter - markerPreScaleDiameter) / 2
+const markerMarginTop = markerPostScaleDisplacement;
+
 const totalMonths = getPreciseDelta(events[0], events[events.length - 1])
-const spacingMultiplier = computed(() => { return (windowWidth.value - 8 * events.length - 4) / totalMonths })
+const spacingMultiplier = computed(() => {
+  return (width.value - markerPreScaleDiameter * events.length - 2 * markerPostScaleDisplacement) / totalMonths
+})
 
 const eventsWithDeltas = getEventsWithDeltas(events).map((eventWithDelta) => {
   return {
     ...eventWithDelta,
-    marginLeft: computed(() => {
+    preludeWidth: computed(() => {
       return eventWithDelta.delta * spacingMultiplier.value
     }),
   }
@@ -56,85 +79,62 @@ const eventsWithDeltas = getEventsWithDeltas(events).map((eventWithDelta) => {
 </script>
 
 <template>
-  <ul id="events">
-    <template v-for="eventMarker in eventsWithDeltas">
-      <li>
-        <div class="event-marker">
-          <div
-            class="pre-event-period"
-            :style="{'width': `${eventMarker.marginLeft.value}px`}"
-          ></div>
-          <div class="event-marker-box">
-            <div class="event-marker-dot"></div>
-            <span>{{ eventMarker.year }}</span>
-          </div>
+  <ul
+    id="markers"
+    ref="markersElement"
+    :style="{
+      'padding-left': `${markerPostScaleDisplacement}px`,
+    }"
+  >
+    <li v-for="marker in eventsWithDeltas">
+      <div
+        class="prelude"
+        :style="{
+          'width': `${marker.preludeWidth.value}px`,
+          'height': `${preludeHeight}px`,
+          'margin-top': `${preludeMarginTop}px`,
+        }"
+      ></div>
+      <div :style="{'width': `${markerPreScaleDiameter}px`}">
+        <div
+          class="marker-dot"
+          :style="{
+            'width': `${markerPreScaleDiameter}px`,
+            'height': `${markerPreScaleDiameter}px`,
+            'border-radius': `${markerPreScaleDiameter / 2}px`,
+            'margin-top': `${markerMarginTop}px`,
+            'transform': `scale(${scaleFactor})`,
+          }"
+        >
         </div>
-      </li>
-    </template>
+        <span>{{ marker.year }}</span>
+      </div>
+    </li>
   </ul>
 </template>
 
 <style scoped>
-ul#events {
-  position: absolute;
+ul#markers {
   display: flex;
   margin: 0 0 0 0;
-  padding: 0 0 0 0;
-  padding-left: 2px;
   z-index: 0;
-
-  /* DEBUG */
-  /* border: dashed 1px black; */
 }
 
-ul#events > li {
+ul#markers > li {
   list-style-type: none;
-
-  /* DEBUG */
-  /* padding-left: 30px; */
-  /* border: dashed 1px black; */
-}
-
-.event-marker {
   display: flex;
 }
 
-.event-marker-box {
-  width: 8px;
+.prelude {
+  background-color: blue;
 }
 
-.pre-event-period {
-  background-color: red;
-  height: 4px;
-  margin-top: 4px;
-
-  /* transform: scaleX(1.1); */
-
-  /* DEBUG */
-  /* border: dashed 1px black; */
-}
-
-.event-marker-dot {
+.marker-dot {
   margin: 0 0 0 0;
-  margin-top: 2px;
-  /* margin-left: 2px; */
-  transform: scale(1.5);
-
-  background-color: red;
-  width: 8px;
-  height: 8px;
-  border-radius: 4px;
-
-  /* background-color: black; */
-
-  /* DEBUG */
-
-  font-size: 8px;
+  background-color: blue;
 }
 
-ul#events > li > .event-marker div > span {
-  /* DEBUG */
-
+ul#markers span {
   font-size: 8px;
 }
 </style>

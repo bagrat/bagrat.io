@@ -11,6 +11,10 @@ const events = [
     month: 8,
   },
   {
+    year: 2000,
+    month: 8,
+  },
+  {
     year: 2004,
     month: 8,
   },
@@ -50,12 +54,16 @@ const events = [
     year: 2021,
     month: 8,
   },
+  {
+    year: 2022,
+    month: 5,
+  },
 ]
 </script>
 
 <template>
   <h1>Bagrat Aznauryan</h1>
-  <Timeline :events="events"></Timeline>
+  <Timeline :events="events" :height="12"></Timeline>
 </template>
 
 <style>
