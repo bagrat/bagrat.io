@@ -35,7 +35,7 @@ function handleScroll(direction) {
   /* max-height: 90vh; */
 
   /* DEBUG */
-  border: dashed 1px black;
+  /* border: dashed 1px black; */
 }
 
 #timeline-axis {

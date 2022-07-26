@@ -33,16 +33,17 @@ function getEventsWithDeltas(events) {
 }
 
 const windowWidth = ref(window.innerWidth)
-console.log(windowWidth)
+
 onMounted(() => {
     window.addEventListener('resize', () => {windowWidth.value = window.innerWidth})
 })
+
 onUnmounted(() => {
     window.removeEventListener('resize', () => {windowWidth.value = window.innerWidth})
 })
 
 const totalMonths = getPreciseDelta(events[0], events[events.length - 1])
-const spacingMultiplier = computed(() => { return (windowWidth.value - 12 * events.length) / totalMonths })
+const spacingMultiplier = computed(() => { return (windowWidth.value - 8 * events.length - 4) / totalMonths })
 
 const eventsWithDeltas = getEventsWithDeltas(events).map((eventWithDelta) => {
   return {
@@ -57,9 +58,17 @@ const eventsWithDeltas = getEventsWithDeltas(events).map((eventWithDelta) => {
 <template>
   <ul id="events">
     <template v-for="eventMarker in eventsWithDeltas">
-      <li :style="{'margin-left': `${eventMarker.marginLeft.value}px`}">
-        <div></div>
-        <span>{{ eventMarker.year }}</span>
+      <li>
+        <div class="event-marker">
+          <div
+            class="pre-event-period"
+            :style="{'width': `${eventMarker.marginLeft.value}px`}"
+          ></div>
+          <div class="event-marker-box">
+            <div class="event-marker-dot"></div>
+            <span>{{ eventMarker.year }}</span>
+          </div>
+        </div>
       </li>
     </template>
   </ul>
@@ -71,8 +80,8 @@ ul#events {
   display: flex;
   margin: 0 0 0 0;
   padding: 0 0 0 0;
+  padding-left: 2px;
   z-index: 0;
-  padding-left: 0px;
 
   /* DEBUG */
   /* border: dashed 1px black; */
@@ -86,31 +95,46 @@ ul#events > li {
   /* border: dashed 1px black; */
 }
 
-ul#events > li > div {
-  /* min-width: 6px; */
-  /* width: 6px; */
+.event-marker {
+  display: flex;
+}
 
-  /* min-height: 6px; */
-  /* height: 6px; */
+.event-marker-box {
+  width: 8px;
+}
 
-  /* border-radius: 3px; */
+.pre-event-period {
+  background-color: red;
+  height: 4px;
+  margin-top: 4px;
 
-  width: 12px;
-  min-height: 12px;
-  max-height: 12px;
-  border-radius: 6px;
+  /* transform: scaleX(1.1); */
 
-  background-color: black;
+  /* DEBUG */
+  /* border: dashed 1px black; */
+}
+
+.event-marker-dot {
+  margin: 0 0 0 0;
+  margin-top: 2px;
+  /* margin-left: 2px; */
+  transform: scale(1.5);
+
+  background-color: red;
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+
+  /* background-color: black; */
 
   /* DEBUG */
 
-  /* margin-top: 2px; */
   font-size: 8px;
 }
 
-ul#events > li > span {
+ul#events > li > .event-marker div > span {
   /* DEBUG */
 
-  font-size: 5px;
+  font-size: 8px;
 }
 </style>
