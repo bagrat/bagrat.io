@@ -20,7 +20,6 @@ function handleScroll(direction) {
 </script>
 
 <template>
-  <span>Counter: {{ counter }}</span>
   <div id="timeline-container">
     <div id="timeline-axis"></div>
     <EventMarkers :events="events"/>
@@ -35,15 +34,15 @@ function handleScroll(direction) {
   max-height: 90vh;
 
   /* DEBUG */
-  border: dashed 1px black;
+  /* border: dashed 1px black; */
 }
 
 #timeline-axis {
   background-color: black;
 
-  margin-top: 2px;
+  margin-top: 4px;
   min-height: 2px;
-  height: 2px;
+  height: 4px;
 
   width: 1000px;
   min-width: 1000px;

@@ -5,7 +5,15 @@ const { events } = defineProps({
   events: Array,
 })
 
-const spacingMultiplier = 20;
+const spacingMultiplier = 2;
+
+function getPreciseDelta(event, nextEvent) {
+  if (event.year === nextEvent.year) {
+    return nextEvent.month - event.month
+  } else {
+    return 12 * (nextEvent.year - event.year - 1) + (12 - event.month + nextEvent.month)
+  }
+}
 
 function getEventsWithDeltas(events) {
   return events.reduce((result, current, index, events) => {
@@ -13,28 +21,28 @@ function getEventsWithDeltas(events) {
       const previous = result
       return [
         {...previous, delta: 0},
-        {...current, delta: current.year - previous.year},
+        {...current, delta: getPreciseDelta(previous, current)},
       ]
     } else {
       const previous = events[index - 1]
 
       return [
         ...result,
-        {...current, delta: current.year - previous.year},
+        {...current, delta: getPreciseDelta(previous, current)},
       ]
     }
   })
 }
 
 const eventsWithDeltas = getEventsWithDeltas(events)
-console.log(eventsWithDeltas)
 </script>
 
 <template>
   <ul id="events">
     <template v-for="eventMarker in eventsWithDeltas">
       <li :style="{'margin-left': `${eventMarker.delta * spacingMultiplier}px`}">
-        <div>{{ eventMarker.year }}</div>
+        <div></div>
+        <span>{{ eventMarker.year }}</span>
       </li>
     </template>
   </ul>
@@ -70,16 +78,16 @@ ul#events > li > div {
 
   /* border-radius: 3px; */
 
-  min-width: 2px;
-  width: 2px;
-  min-height: 6px;
-  height: 6px;
+  width: 12px;
+  min-height: 12px;
+  max-height: 12px;
+  border-radius: 6px;
 
   background-color: black;
 
   /* DEBUG */
 
-  padding-top: 10px;
+  /* margin-top: 2px; */
   font-size: 8px;
 }
 </style>
