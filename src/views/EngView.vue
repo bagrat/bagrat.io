@@ -64,7 +64,7 @@ const events = [
 <template>
   <!-- <h1>Bagrat Aznauryan</h1> -->
   <h1>Test</h1>
-  <Timeline :events="events" :height="12"></Timeline>
+  <Timeline :events="events" :height="15" :markersPadding="[40, 40]" :style="{'margin-top': '50px'}"></Timeline>
 </template>
 
 <style>

@@ -1,9 +1,17 @@
 <script setup>
 import { onMounted, onUnmounted, defineProps, ref, computed } from 'vue'
 
-const { events, height } = defineProps({
+const { events, height, paddingLeft, paddingRight } = defineProps({
   events: Array,
   height: Number,
+  paddingLeft: {
+    type: Number,
+    default: 0,
+  },
+  paddingRight: {
+    type: Number,
+    default: 0,
+  },
 })
 
 function calculatePrelude(event, nextEvent) {
@@ -59,9 +67,12 @@ const markerPreScaleDiameter = markerDiameter / scaleFactor
 const markerPostScaleDisplacement = (markerDiameter - markerPreScaleDiameter) / 2
 const markerMarginTop = markerPostScaleDisplacement;
 
+const finalPaddingLeft = paddingLeft + markerPostScaleDisplacement
+const finalPaddingRight = paddingRight + markerPostScaleDisplacement
+
 const totalMonths = calculatePrelude(events[0], events[events.length - 1])
 const spacingMultiplier = computed(() => {
-  return (width.value - markerPreScaleDiameter * events.length - 2 * markerPostScaleDisplacement) / totalMonths
+  return (width.value - markerPreScaleDiameter * events.length - finalPaddingLeft - finalPaddingRight) / totalMonths
 })
 
 const markers = getMarkersWithPrelude(events).map((markerWithPrelude) => {
@@ -72,15 +83,14 @@ const markers = getMarkersWithPrelude(events).map((markerWithPrelude) => {
     }),
   }
 })
+const one = ref(1)
+markers[0].preludeWidth = computed(() => finalPaddingLeft * one.value)
 </script>
 
 <template>
   <ul
     id="markers"
     ref="markersElement"
-    :style="{
-      'padding-left': `${markerPostScaleDisplacement}px`,
-    }"
   >
     <li v-for="marker in markers">
       <div
@@ -113,6 +123,7 @@ const markers = getMarkersWithPrelude(events).map((markerWithPrelude) => {
 ul#markers {
   display: flex;
   margin: 0 0 0 0;
+  padding: 0 0 0 0;
   z-index: 0;
 }
 
