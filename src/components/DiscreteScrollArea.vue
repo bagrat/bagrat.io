@@ -106,10 +106,16 @@ function emitDiscreteScroll(direction) {
 <style>
 #scroll-area {
   height: 90vh;
+  width: 100vh;
   overflow: scroll;
+
+  z-index: 0;
 
   -ms-overflow-style: none;
   scrollbar-width: none;
+
+  /* DEBUG */
+  /* border: dashed 1px black; */
 }
 
 #scroll-area::-webkit-scrollbar {

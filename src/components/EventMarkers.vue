@@ -1,8 +1,9 @@
 <script setup>
 import { onMounted, onUnmounted, defineProps, ref, computed } from 'vue'
 
-const { events, height, paddingLeft, paddingRight } = defineProps({
+const props = defineProps({
   events: Array,
+  activeIndex: Number,
   height: Number,
   paddingLeft: {
     type: Number,
@@ -13,6 +14,9 @@ const { events, height, paddingLeft, paddingRight } = defineProps({
     default: 0,
   },
 })
+const { events, height, paddingLeft, paddingRight } = props
+
+const activeIndex = computed(() => props.activeIndex)
 
 function calculatePrelude(event, nextEvent) {
   if (event.year === nextEvent.year) {
@@ -75,16 +79,28 @@ const spacingMultiplier = computed(() => {
   return (width.value - markerPreScaleDiameter * events.length - finalPaddingLeft - finalPaddingRight) / totalMonths
 })
 
-const markers = getMarkersWithPrelude(events).map((markerWithPrelude) => {
-  return {
-    ...markerWithPrelude,
-    preludeWidth: computed(() => {
-      return markerWithPrelude.prelude * spacingMultiplier.value
-    }),
-  }
+const markers = computed(() => {
+  const markersWithPrelude = getMarkersWithPrelude(events)
+  const markersEnhanced = markersWithPrelude.map((markerWithPrelude, index) => {
+      const isActive = index === activeIndex.value
+      const hasElapsed = index < activeIndex.value
+      const preludeHasElapsed = hasElapsed || isActive
+
+      return {
+        ...markerWithPrelude,
+        preludeWidth: computed(() => {
+          return markerWithPrelude.prelude * spacingMultiplier.value
+        }),
+        active: isActive,
+        elapsed: hasElapsed,
+        preludeHasElapsed: preludeHasElapsed,
+    }
+  })
+  markersEnhanced[0].preludeWidth = computed(() => finalPaddingLeft * one.value)
+
+  return markersEnhanced
 })
 const one = ref(1)
-markers[0].preludeWidth = computed(() => finalPaddingLeft * one.value)
 </script>
 
 <template>
@@ -94,16 +110,28 @@ markers[0].preludeWidth = computed(() => finalPaddingLeft * one.value)
   >
     <li v-for="marker in markers">
       <div
-        class="prelude"
+        class="prelude-container"
         :style="{
           'width': `${marker.preludeWidth.value}px`,
           'height': `${preludeHeight}px`,
           'margin-top': `${preludeMarginTop}px`,
         }"
-      ></div>
+      >
+        <div
+          class="prelude"
+          :style="{
+            'width': marker.preludeHasElapsed ? `${marker.preludeWidth.value}px` : '0px',
+            'height': `${preludeHeight}px`,
+          }"
+        ></div>
+      </div>
       <div :style="{'width': `${markerPreScaleDiameter}px`}">
         <div
           class="marker-dot"
+          :class="{
+            'active': marker.active,
+            'passed': marker.elapsed,
+          }"
           :style="{
             'width': `${markerPreScaleDiameter}px`,
             'height': `${markerPreScaleDiameter}px`,
@@ -138,6 +166,13 @@ ul#markers > li {
 
 .marker-dot {
   margin: 0 0 0 0;
+  background-color: black;
+}
+
+.marker-dot.active {
+  background-color: red;
+}
+.marker-dot.passed {
   background-color: blue;
 }
 

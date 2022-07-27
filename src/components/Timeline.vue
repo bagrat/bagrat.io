@@ -1,10 +1,10 @@
 <script setup>
-import { ref, defineProps } from 'vue'
-import DiscreteScrollArea from './DiscreteScrollArea.vue'
+import { computed, defineProps } from 'vue'
 import EventMarkers from './EventMarkers.vue'
 
-const { events, height, markersPadding } = defineProps({
+const props = defineProps({
   events: Array,
+  activeIndex: Number,
   height: Number,
   markersPadding: {
     type: Array,
@@ -18,23 +18,14 @@ const { events, height, markersPadding } = defineProps({
     }
   }
 })
+const { events, height, markersPadding } = props
+
+const activeIndex = computed(() => props.activeIndex)
 
 const [markersPaddingLeft, markersPaddingRight] = markersPadding
 
-
 const axisHeight = height / 3;
 const axisMarginTop = axisHeight;
-
-const counter = ref(0)
-
-function handleScroll(direction) {
-  if (direction === 'forwards') {
-    counter.value++
-  } else {
-    counter.value--
-  }
-}
-
 </script>
 
 <template>
@@ -48,6 +39,7 @@ function handleScroll(direction) {
     >
       <EventMarkers
         :events="events"
+        :activeIndex="activeIndex"
         :height="height"
         :paddingLeft="markersPaddingLeft"
         :paddingRight="markersPaddingRight"
@@ -56,7 +48,6 @@ function handleScroll(direction) {
         }"
       />
     </div>
-    <DiscreteScrollArea @discreteScroll="handleScroll"/>
   </div>
 </template>
 

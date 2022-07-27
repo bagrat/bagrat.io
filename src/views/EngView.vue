@@ -1,5 +1,7 @@
 <script setup>
+import { ref } from 'vue'
 import Timeline from '@/components/Timeline.vue'
+import DiscreteScrollArea from '@/components//DiscreteScrollArea.vue'
 
 const events = [
   {
@@ -59,12 +61,26 @@ const events = [
     month: 5,
   },
 ]
+
+const activeEventIndex = ref(0)
+function handleScroll(direction) {
+  if (direction === 'forwards') {
+    if (activeEventIndex.value < events.length) {
+      activeEventIndex.value++
+    }
+  } else {
+    if (activeEventIndex.value >= 0) {
+      activeEventIndex.value--
+    }
+  }
+}
 </script>
 
 <template>
   <!-- <h1>Bagrat Aznauryan</h1> -->
   <h1>Test</h1>
-  <Timeline :events="events" :height="15" :markersPadding="[40, 40]" :style="{'margin-top': '50px'}"></Timeline>
+  <Timeline :events="events" :activeIndex="activeEventIndex" :height="15" :markersPadding="[40, 40]" :style="{'margin-top': '50px'}"></Timeline>
+  <DiscreteScrollArea @discreteScroll="handleScroll"/>
 </template>
 
 <style>
