@@ -62,7 +62,8 @@ const events = [
 </script>
 
 <template>
-  <h1>Bagrat Aznauryan</h1>
+  <!-- <h1>Bagrat Aznauryan</h1> -->
+  <h1>Test</h1>
   <Timeline :events="events" :height="12"></Timeline>
 </template>
 

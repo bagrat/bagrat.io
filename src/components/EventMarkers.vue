@@ -1,12 +1,12 @@
 <script setup>
-import { onMounted, onUnmounted, onUpdated, defineProps, ref, computed } from 'vue'
+import { onMounted, onUnmounted, defineProps, ref, computed } from 'vue'
 
 const { events, height } = defineProps({
   events: Array,
   height: Number,
 })
 
-function getPreciseDelta(event, nextEvent) {
+function calculatePrelude(event, nextEvent) {
   if (event.year === nextEvent.year) {
     return nextEvent.month - event.month
   } else {
@@ -14,20 +14,20 @@ function getPreciseDelta(event, nextEvent) {
   }
 }
 
-function getEventsWithDeltas(events) {
+function getMarkersWithPrelude(events) {
   return events.reduce((result, current, index, events) => {
     if (index === 1) {
       const previous = result
       return [
-        {...previous, delta: 0},
-        {...current, delta: getPreciseDelta(previous, current)},
+        {...previous, prelude: 0},
+        {...current, prelude: calculatePrelude(previous, current)},
       ]
     } else {
       const previous = events[index - 1]
 
       return [
         ...result,
-        {...current, delta: getPreciseDelta(previous, current)},
+        {...current, prelude: calculatePrelude(previous, current)},
       ]
     }
   })
@@ -45,10 +45,6 @@ onMounted(() => {
   window.addEventListener('resize', calculateWidth)
 })
 
-onUpdated(() => {
-  calculateWidth()
-})
-
 onUnmounted(() => {
   window.removeEventListener('resize', calculateWidth)
 })
@@ -63,16 +59,16 @@ const markerPreScaleDiameter = markerDiameter / scaleFactor
 const markerPostScaleDisplacement = (markerDiameter - markerPreScaleDiameter) / 2
 const markerMarginTop = markerPostScaleDisplacement;
 
-const totalMonths = getPreciseDelta(events[0], events[events.length - 1])
+const totalMonths = calculatePrelude(events[0], events[events.length - 1])
 const spacingMultiplier = computed(() => {
   return (width.value - markerPreScaleDiameter * events.length - 2 * markerPostScaleDisplacement) / totalMonths
 })
 
-const eventsWithDeltas = getEventsWithDeltas(events).map((eventWithDelta) => {
+const markers = getMarkersWithPrelude(events).map((markerWithPrelude) => {
   return {
-    ...eventWithDelta,
+    ...markerWithPrelude,
     preludeWidth: computed(() => {
-      return eventWithDelta.delta * spacingMultiplier.value
+      return markerWithPrelude.prelude * spacingMultiplier.value
     }),
   }
 })
@@ -86,7 +82,7 @@ const eventsWithDeltas = getEventsWithDeltas(events).map((eventWithDelta) => {
       'padding-left': `${markerPostScaleDisplacement}px`,
     }"
   >
-    <li v-for="marker in eventsWithDeltas">
+    <li v-for="marker in markers">
       <div
         class="prelude"
         :style="{

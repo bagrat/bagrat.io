@@ -3,7 +3,7 @@ import { shallowMount } from '@vue/test-utils'
 
 import EventMarkers from '../EventMarkers.vue'
 
-describe('Deltas calculation', () => {
+describe('Prelude calculation', () => {
   const events = [
     {year: 2000, month: 0},
     {year: 2001, month: 1},
@@ -16,46 +16,46 @@ describe('Deltas calculation', () => {
     }
   })
 
-  describe('getEventsWithDeltas', () => {
-    it('should add the delta with the previous event marker in each event marker', () => {
+  describe('getMarkersWithPrelude', () => {
+    it('should add the prelude as the delta with the previous event marker in each event marker', () => {
 
       const wrapper = shallowMount(EventMarkers, {
         propsData: {
           events: events,
         }
       })
-      const getEventsWithDeltas = wrapper.vm.getEventsWithDeltas
+      const getMarkersWithPrelude = wrapper.vm.getMarkersWithPrelude
 
-      const withDeltas = getEventsWithDeltas(events, {
+      const markers = getMarkersWithPrelude(events, {
         propsData: {
           events: events,
         }
       })
 
-      expect(withDeltas).toEqual([
-        {year: 2000, month:0, delta: 0},
-        {year: 2001, month:1, delta: 13},
-        {year: 2003, month:3, delta: 26},
-        {year: 2006, month:8, delta: 41},
+      expect(markers).toEqual([
+        {year: 2000, month:0, prelude: 0},
+        {year: 2001, month:1, prelude: 13},
+        {year: 2003, month:3, prelude: 26},
+        {year: 2006, month:8, prelude: 41},
       ])
     })
   })
 
-  describe('getPreciseDela', () => {
-    it('should calculate deltas in months', () => {
-      const getPreciseDelta = wrapper.vm.getPreciseDelta
+  describe('calculatePrelude', () => {
+    it('should calculate preludes in months', () => {
+      const calculatePrelude = wrapper.vm.calculatePrelude
 
-      let delta = getPreciseDelta(
+      let prelude = calculatePrelude(
         {year: 2000, month: 0},
         {year: 2001, month: 11},
       )
-      expect(delta).toBe(23)
+      expect(prelude).toBe(23)
 
-      delta = getPreciseDelta(
+      prelude = calculatePrelude(
         {year: 2000, month: 0},
         {year: 2000, month: 5},
       )
-      expect(delta).toBe(5)
+      expect(prelude).toBe(5)
     })
   })
 })
