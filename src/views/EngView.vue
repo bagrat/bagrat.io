@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import Timeline from '@/components/Timeline.vue'
 import DiscreteScrollArea from '@/components//DiscreteScrollArea.vue'
 
@@ -62,10 +62,10 @@ const events = [
   },
 ]
 
-const activeEventIndex = ref(0)
+const activeEventIndex = ref(-1)
 function handleScroll(direction) {
   if (direction === 'forwards') {
-    if (activeEventIndex.value < events.length) {
+    if (activeEventIndex.value < events.length - 1) {
       activeEventIndex.value++
     }
   } else {
@@ -74,6 +74,10 @@ function handleScroll(direction) {
     }
   }
 }
+
+onMounted(() => {
+  activeEventIndex.value = 5
+})
 </script>
 
 <template>

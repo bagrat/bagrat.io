@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, onUnmounted, defineProps, ref, computed } from 'vue'
+import { onMounted, onUnmounted, onUpdated, defineProps, ref, computed } from 'vue'
 
 const props = defineProps({
   events: Array,
@@ -17,6 +17,11 @@ const props = defineProps({
 const { events, height, paddingLeft, paddingRight } = props
 
 const activeIndex = computed(() => props.activeIndex)
+let previousIndex = activeIndex.value - 1
+
+onUpdated(() => {
+  previousIndex = activeIndex.value
+})
 
 function calculatePrelude(event, nextEvent) {
   if (event.year === nextEvent.year) {
@@ -79,48 +84,52 @@ const spacingMultiplier = computed(() => {
   return (width.value - markerPreScaleDiameter * events.length - finalPaddingLeft - finalPaddingRight) / totalMonths
 })
 
+const cssVars = {
+  '--scale-factor': scaleFactor,
+  '--active-scale-factor': scaleFactor * 1.4,
+}
+
 const markers = computed(() => {
   const markersWithPrelude = getMarkersWithPrelude(events)
   const markersEnhanced = markersWithPrelude.map((markerWithPrelude, index) => {
-      const isActive = index === activeIndex.value
-      const hasElapsed = index < activeIndex.value
-      const preludeHasElapsed = hasElapsed || isActive
-
       return {
         ...markerWithPrelude,
-        preludeWidth: computed(() => {
-          return markerWithPrelude.prelude * spacingMultiplier.value
-        }),
-        active: isActive,
-        elapsed: hasElapsed,
-        preludeHasElapsed: preludeHasElapsed,
+        preludeWidth: markerWithPrelude.prelude * spacingMultiplier.value,
+        isActive: index === activeIndex.value,
+        hasElapsed: index < activeIndex.value,
+        preludeHasElapsed: index <= activeIndex.value,
+        isPrevious: index === previousIndex,
     }
   })
-  markersEnhanced[0].preludeWidth = computed(() => finalPaddingLeft * one.value)
+  markersEnhanced[0].preludeWidth = finalPaddingLeft
 
   return markersEnhanced
 })
-const one = ref(1)
 </script>
 
 <template>
   <ul
     id="markers"
     ref="markersElement"
+    :style="{...cssVars}"
   >
     <li v-for="marker in markers">
       <div
         class="prelude-container"
         :style="{
-          'width': `${marker.preludeWidth.value}px`,
+          'width': `${marker.preludeWidth}px`,
           'height': `${preludeHeight}px`,
           'margin-top': `${preludeMarginTop}px`,
         }"
       >
         <div
           class="prelude"
+          :class="{
+            'prelude-active': marker.isActive,
+            'prelude-previous': marker.isPrevious,
+          }"
           :style="{
-            'width': marker.preludeHasElapsed ? `${marker.preludeWidth.value}px` : '0px',
+            'width': marker.preludeHasElapsed ? `${marker.preludeWidth}px` : '0px',
             'height': `${preludeHeight}px`,
           }"
         ></div>
@@ -129,15 +138,15 @@ const one = ref(1)
         <div
           class="marker-dot"
           :class="{
-            'active': marker.active,
-            'passed': marker.elapsed,
+            'active': marker.isActive,
+            'elapsed': marker.hasElapsed,
+            'previous': marker.isPrevious,
           }"
           :style="{
             'width': `${markerPreScaleDiameter}px`,
             'height': `${markerPreScaleDiameter}px`,
             'border-radius': `${markerPreScaleDiameter / 2}px`,
             'margin-top': `${markerMarginTop}px`,
-            'transform': `scale(${scaleFactor})`,
           }"
         >
         </div>
@@ -160,20 +169,36 @@ ul#markers > li {
   display: flex;
 }
 
-.prelude {
-  background-color: blue;
-}
-
 .marker-dot {
   margin: 0 0 0 0;
   background-color: black;
+  transform: scale(calc(var(--scale-factor)))
 }
 
 .marker-dot.active {
+  transform: scale(calc(var(--active-scale-factor)));
+  transition-property: background-color, transform;
+  transition-delay: 0.4s, 0.2s;
+  transition-duration: 0.15s, 0.3s;
+  transition-timing-function: cubic-bezier(.03,1.07,.27,1), cubic-bezier(.82,-0.12,.95,2.04); 
+}
+
+.marker-dot.previous {
+  transition-property: background-color, transform;
+  transition-duration: 0.1s, 0.3s;
+  transition-timing-function: ease-out;
+}
+
+.prelude,
+.active,
+.elapsed {
   background-color: red;
 }
-.marker-dot.passed {
-  background-color: blue;
+
+.prelude-previous,
+.prelude-active {
+  transition: 0.4s width ease;
+  transition-delay: 0.1s;
 }
 
 ul#markers span {
