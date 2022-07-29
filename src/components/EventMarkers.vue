@@ -150,7 +150,9 @@ const markers = computed(() => {
           }"
         >
         </div>
-        <span>{{ marker.year }}</span>
+        <transition>
+          <div v-if="marker.isActive" class="label">{{ marker.year }}</div>
+        </transition>
       </div>
     </li>
   </ul>
@@ -201,7 +203,21 @@ ul#markers > li {
   transition-delay: 0.1s;
 }
 
-ul#markers span {
-  font-size: 8px;
+.label {
+  font-size: 0.7em;
+  margin-top: 0.7em;
+  transform: translateX(-0.75em);
+}
+
+.label.v-enter-active {
+  transition: opacity 0.4s ease-in 0.35s;
+}
+.label.v-leave-active {
+  transition: opacity 0.3s ease-out;
+}
+
+.label.v-enter-from,
+.label.v-leave-to {
+  opacity: 0;
 }
 </style>

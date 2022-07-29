@@ -29,7 +29,13 @@ const axisMarginTop = axisHeight;
 </script>
 
 <template>
-  <div id="timeline-container">
+  <!-- TODO: Size the height properly so that it includes all children -->
+  <div
+    id="timeline-container"
+    :style="{
+      'height': `${3 * axisHeight * 1.2}px`,
+    }"
+  >
     <div
       id="timeline-axis"
       :style="{
@@ -55,6 +61,8 @@ const axisMarginTop = axisHeight;
 #timeline-container {
   width: 80%;
   margin-left: 10%;
+
+  /* transform: scale(5); */
 
   /* DEBUG */
   /* border: dashed 1px black; */
