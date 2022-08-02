@@ -5,25 +5,15 @@ const emit = defineEmits(['discreteScroll'])
 
 let state = 'not-scrolling';
 
-const baseScrollPosition = 50000
-const detectableScrollLength = 100
-
-const scrollArea = ref(null)
-
 const scrollStopCheckTimeout = 200
 let stopDetectorTimer = null
 
 const scrollTimeout = 400
 let timeoutTimer = null
 
-onMounted(() => {
-  resetScrollPosition()
-})
-
-function getScrollVector(scrollPosition) {
-  const delta = scrollPosition - baseScrollPosition
-  const length = Math.abs(delta)
-  if (delta > 0) {
+function getScrollVector(e) {
+  const length = Math.abs(e.deltaY)
+  if (e.deltaY > 0) {
     return {
       direction: 'forwards',
       length,
@@ -37,30 +27,27 @@ function getScrollVector(scrollPosition) {
   }
 }
 
-function handleScroll(e) {
-  // console.log("Scroll", e.target.scrollTop, state)
+function handleWheel(e) {
+  console.log("Scroll", e, state)
 
-  if (state === 'returning-to-base') {
-    state = 'not-scrolling'
-    return
-  }
+  const { direction, length } = getScrollVector(e)
 
   if (state !== 'timed-out') {
     state = 'scrolling'
 
     if (timeoutTimer == null) {
-      timeoutTimer = setTimeout(() => handleTimeout(getScrollVector(e.target.scrollTop)), scrollTimeout)
+      timeoutTimer = setTimeout(() => handleTimeout(direction), scrollTimeout)
     }
   }
 
   if (stopDetectorTimer != null) {
     clearTimeout(stopDetectorTimer);
   }
-  stopDetectorTimer = setTimeout(() => handleScrollStopped(getScrollVector(e.target.scrollTop)), scrollStopCheckTimeout)
+  stopDetectorTimer = setTimeout(() => handleScrollStopped(direction), scrollStopCheckTimeout)
 }
 
-function handleTimeout({ direction }) {
-  // console.log("Timed out", state)
+function handleTimeout(direction) {
+  console.log("Timed out", state)
   if (state === 'scrolling') {
     state = 'timed-out';
 
@@ -71,58 +58,45 @@ function handleTimeout({ direction }) {
   timeoutTimer = null;
 }
 
-function handleScrollStopped({ direction, length }) {
-  // console.log('Scroll stopped', state);
+function handleScrollStopped(direction) {
+  console.log('Scroll stopped', state);
 
   const alreadyTimedOut = state === 'timed-out'
 
-  if (!alreadyTimedOut) {
-    if (length >= detectableScrollLength) {
-      emitDiscreteScroll(direction)
-    }
-  }
+  resetState()
 
-  resetScrollPosition();
+  if (!alreadyTimedOut) {
+    emitDiscreteScroll(direction)
+  }
 }
 
-function resetScrollPosition() {
-  // console.log('Returning to base', state)
-  state = 'returning-to-base'
-  scrollArea.value.scrollTop = baseScrollPosition
+function resetState() {
+  console.log('resetting state', state)
+  state = 'not-scrolling'
 }
 
 function emitDiscreteScroll(direction) {
-  // console.log('emitting', direction, state)
+  console.log('emitting', direction, state)
   emit('discreteScroll', direction)
+}
+
+function handleTouchStart(e) {
+  console.log('touch start', e)
 }
 </script>
 
 <template>
-  <div id="scroll-area" ref="scrollArea" @scroll="handleScroll">
-    <div></div>
+  <div id="scroll-area" @wheel.prevent="handleWheel" @touchstart.prevent="handleTouchStart">
+    <slot/>
   </div>
 </template>
 
 <style>
 #scroll-area {
-  height: 90vh;
-  width: 100vh;
-  overflow: scroll;
-
-  z-index: 0;
-
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  height: 100%;
+  width: 100%;
 
   /* DEBUG */
   /* border: dashed 1px black; */
-}
-
-#scroll-area::-webkit-scrollbar {
-  display:none;
-}
-
-#scroll-area > div {
-  height: 100000px;
 }
 </style>

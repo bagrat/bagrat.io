@@ -83,8 +83,9 @@ onMounted(() => {
 <template>
   <!-- <h1>Bagrat Aznauryan</h1> -->
   <h1>Test</h1>
-  <Timeline :events="events" :activeIndex="activeEventIndex" :height="15" :markersPadding="[40, 40]" :style="{'margin-top': '50px'}"></Timeline>
-  <DiscreteScrollArea @discreteScroll="handleScroll"/>
+  <DiscreteScrollArea @discreteScroll="handleScroll" :style="{'padding-bottom': '200px'}">
+    <Timeline :events="events" :activeIndex="activeEventIndex" :height="15" :markersPadding="[40, 40]"></Timeline>
+  </DiscreteScrollArea>
 </template>
 
 <style>
