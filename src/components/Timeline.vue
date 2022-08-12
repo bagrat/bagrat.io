@@ -19,18 +19,11 @@ const props = defineProps({
 })
 const { events, height, markersPadding } = props
 
-const activeIndex = computed(() => props.activeIndex)
+const activeIndex = computed(() => Math.min(events.length - 1, Math.max(props.activeIndex, 0)))
 
 let previousIndex = activeIndex.value - 1
 
-onUpdated(() => {
-  previousIndex = activeIndex.value
-})
-
 const [markersPaddingLeft, markersPaddingRight] = markersPadding
-
-const axisHeight = height / 3;
-const axisMarginTop = axisHeight;
 
 function calculatePrelude(event, nextEvent) {
   if (event.year === nextEvent.year) {
@@ -59,11 +52,11 @@ function getMarkersWithPrelude(events) {
   })
 }
 
+const containerElement = ref(null)
 const width = ref(0)
-const markersElement = ref(null)
 
 function calculateWidth() {
-  width.value = markersElement.value.clientWidth
+  width.value = containerElement.value.clientWidth
 }
 
 onMounted(() => {
@@ -75,108 +68,82 @@ onUnmounted(() => {
   window.removeEventListener('resize', calculateWidth)
 })
 
-const markerDiameter = height;
-
-const preludeHeight = height / 3;
-const preludeMarginTop = markerDiameter / 3;
-
-const scaleFactor = 1.5
-const markerPreScaleDiameter = markerDiameter / scaleFactor
-const markerPostScaleDisplacement = (markerDiameter - markerPreScaleDiameter) / 2
-const markerMarginTop = markerPostScaleDisplacement;
-
-const finalPaddingLeft = markersPaddingLeft + markerPostScaleDisplacement
-const finalPaddingRight = markersPaddingRight + markerPostScaleDisplacement
-
-const totalMonths = calculatePrelude(events[0], events[events.length - 1])
-const spacingMultiplier = computed(() => {
-  return (width.value - markerPreScaleDiameter * events.length - finalPaddingLeft - finalPaddingRight) / totalMonths
+onUpdated(() => {
+  calculateWidth()
+  previousIndex = activeIndex.value
 })
 
-const cssVars = {
-  '--scale-factor': scaleFactor,
-  '--active-scale-factor': scaleFactor * 1.4,
-}
+const axisHeight = height / 3;
+
+const markerDiameter = height;
+const activeScaleFactor = 1.5;
+const containerPaddingTop = (markerDiameter * (activeScaleFactor - 1)) / 2;
+
+const totalMonths = calculatePrelude(events[0], events[events.length - 1])
+const monthUnitWidth = computed(() => {
+  return (width.value - markerDiameter * events.length - markersPaddingLeft - markersPaddingRight) / totalMonths
+})
 
 const markers = computed(() => {
   const markersWithPrelude = getMarkersWithPrelude(events)
-  const markersEnhanced = markersWithPrelude.map((markerWithPrelude, index) => {
-      return {
-        ...markerWithPrelude,
-        preludeWidth: markerWithPrelude.prelude * spacingMultiplier.value,
-        isActive: index === activeIndex.value,
-        hasElapsed: index < activeIndex.value,
-        preludeHasElapsed: index <= activeIndex.value,
-        isPrevious: index === previousIndex,
+  const markers = markersWithPrelude.map((markerWithPrelude, index) => {
+    let preludeWidth = markerWithPrelude.prelude * monthUnitWidth.value
+    if (index === 0) {
+      preludeWidth = markersPaddingLeft
+    }
+
+    return {
+      ...markerWithPrelude,
+      preludeWidth: preludeWidth,
+      isActive: index === activeIndex.value,
+      hasElapsed: index < activeIndex.value,
+      isPrevious: index === previousIndex,
+      cssVars: {
+        '--prelude-width': `${preludeWidth}px`,
+      },
     }
   })
-  markersEnhanced[0].preludeWidth = finalPaddingLeft
 
-  return markersEnhanced
+  return markers
 })
+
+const highlightWidth = computed(() => {
+  return markers.value.slice(0, activeIndex.value + 1).reduce((widthSoFar, marker) => {
+    return widthSoFar + marker.preludeWidth + markerDiameter
+  }, 0) - (markerDiameter / 2)
+})
+
+const cssVars = {
+  '--inactive-color': 'grey',
+  '--active-color': 'black',
+  '--active-scale-factor': activeScaleFactor,
+  '--marker-diameter': `${markerDiameter}px`,
+  '--marker-radius': `${markerDiameter / 2}px`,
+  '--markers-margin-top': `${-2 * axisHeight}px`,
+  '--container-padding-top': `${containerPaddingTop}px`,
+  '--axis-height': `${axisHeight}px`,
+  '--axis-margin-top': `${axisHeight}px`,
+  '--axis-highlight-margin-top': `${-1 * axisHeight}px`,
+}
 </script>
 
 <template>
   <!-- TODO: Size the height properly so that it includes all children -->
-  <div
-    id="timeline-container"
-    :style="{
-      'height': `${3 * axisHeight * 1.2}px`,
-    }"
-  >
-    <div
-      id="timeline-axis"
-      :style="{
-        'margin-top': `${axisMarginTop}px`,
-        'height': `${axisHeight}px`,
-      }"
-    ></div>
-    <ul
-      id="markers"
-      ref="markersElement"
-      :style="{...cssVars}"
-    >
-      <li v-for="marker in markers">
-        <div
-          class="prelude-container"
-          :style="{
-            'width': `${marker.preludeWidth}px`,
-            'height': `${preludeHeight}px`,
-            'margin-top': `${preludeMarginTop}px`,
+  <div id="timeline-container" ref="containerElement" :style="cssVars">
+    <div id="axis"></div>
+    <div id="axis-highlight" :style="{'width': `${highlightWidth}px`}"></div>
+    <ul id="markers">
+      <li v-for="marker in markers" :style="marker.cssVars">
+        <div :class="{
+            'marker': true,
+            'active': marker.isActive,
+            'elapsed': marker.hasElapsed,
+            'previous': marker.isPrevious,
           }"
-        >
-          <div
-            class="prelude"
-            :class="{
-              'prelude-active': marker.isActive,
-              'prelude-previous': marker.isPrevious,
-            }"
-            :style="{
-              'width': marker.preludeHasElapsed ? `${marker.preludeWidth}px` : '0px',
-              'height': `${preludeHeight}px`,
-            }"
-          ></div>
-        </div>
-        <div :style="{'width': `${markerPreScaleDiameter}px`}">
-          <div
-            class="marker-dot"
-            :class="{
-              'active': marker.isActive,
-              'elapsed': marker.hasElapsed,
-              'previous': marker.isPrevious,
-            }"
-            :style="{
-              'width': `${markerPreScaleDiameter}px`,
-              'height': `${markerPreScaleDiameter}px`,
-              'border-radius': `${markerPreScaleDiameter / 2}px`,
-              'margin-top': `${markerMarginTop}px`,
-            }"
-          >
-          </div>
-          <transition>
-            <div v-if="marker.isActive" class="label">{{ marker.year }}</div>
-          </transition>
-        </div>
+        ></div>
+        <transition>
+          <div v-if="marker.isActive" class="label">{{ marker.year }}</div>
+        </transition>
       </li>
     </ul>
   </div>
@@ -184,18 +151,35 @@ const markers = computed(() => {
 
 <style scoped>
 #timeline-container {
-  width: 80%;
-  margin-left: 10%;
+  display: flex;
+  flex-direction: column;
+  padding-top: var(--container-padding-top);
 
   /* DEBUG */
+  width: 80%;
+  margin-left: 10%;
   /* border: dashed 1px black; */
 }
 
-#timeline-axis {
-  background-color: black;
+#axis {
+  background-color: var(--inactive-color);
   width: 100%;
+  height: var(--axis-height);
+  margin-top: var(--axis-margin-top);
 
   z-index: -10;
+}
+
+#axis-highlight {
+  background-color: var(--active-color);
+  height: var(--axis-height);
+  margin-top: var(--axis-highlight-margin-top);
+
+  z-index: -5;
+
+  transition-property: width;
+  transition: 0.4s width ease;
+  transition-delay: 0.1s;
 }
 
 ul#markers {
@@ -203,60 +187,67 @@ ul#markers {
   margin: 0 0 0 0;
   padding: 0 0 0 0;
   z-index: 0;
+  margin-top: var(--markers-margin-top);
 }
 
 ul#markers > li {
   list-style-type: none;
+  max-width: var(--marker-diameter);
   display: flex;
+  flex-direction: column;
+  padding-left: var(--prelude-width);
 }
 
-.marker-dot {
+.marker {
   margin: 0 0 0 0;
-  background-color: black;
-  transform: scale(calc(var(--scale-factor)))
+  background-color: var(--inactive-color);
+
+  width: var(--marker-diameter);
+  height: var(--marker-diameter);
+  border-radius: var(--marker-radius);
 }
 
-.marker-dot.active {
-  transform: scale(calc(var(--active-scale-factor)));
+.marker.active {
+  transform: scale(var(--active-scale-factor));
   transition-property: background-color, transform;
   transition-delay: 0.4s, 0.2s;
   transition-duration: 0.15s, 0.3s;
   transition-timing-function: cubic-bezier(.03,1.07,.27,1), cubic-bezier(.82,-0.12,.95,2.04); 
 }
 
-.marker-dot.previous {
+.marker.previous {
   transition-property: background-color, transform;
   transition-duration: 0.1s, 0.3s;
   transition-timing-function: ease-out;
 }
 
-.prelude,
-.active,
-.elapsed {
-  background-color: red;
-}
-
-.prelude-previous,
-.prelude-active {
-  transition: 0.4s width ease;
-  transition-delay: 0.1s;
+.marker.active,
+.marker.elapsed {
+  background-color: var(--active-color);
 }
 
 .label {
   font-size: 0.7em;
-  margin-top: 0.7em;
-  transform: translateX(-0.75em);
+  margin-top: 0.6em;
+  transform: translateX(-0.50em);
 }
 
 .label.v-enter-active {
-  transition: opacity 0.4s ease-in 0.35s;
+  transition-property: opacity, transform;
+  transition-delay: 0.3s;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
 }
+
 .label.v-leave-active {
-  transition: opacity 0.3s ease-out;
+  transition-property: opacity, transform;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-out;
 }
 
 .label.v-enter-from,
 .label.v-leave-to {
   opacity: 0;
+  transform: scale(0.1) translateY(-800%);
 }
 </style>

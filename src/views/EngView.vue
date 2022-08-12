@@ -4,12 +4,12 @@ import Timeline from '@/components/Timeline.vue'
 import DiscreteScrollArea from '@/components//DiscreteScrollArea.vue'
 
 const events = [
+  // {
+  //   year: 1991,
+  //   month: 0,
+  // },
   {
-    year: 1991,
-    month: 0,
-  },
-  {
-    year: 1997,
+    year: 1998,
     month: 8,
   },
   {
@@ -62,21 +62,21 @@ const events = [
   },
 ]
 
-const activeEventIndex = ref(-1)
+const activeEventIndex = ref(0)
 function handleScroll(direction) {
   if (direction === 'forwards') {
     if (activeEventIndex.value < events.length - 1) {
       activeEventIndex.value++
     }
   } else {
-    if (activeEventIndex.value >= 0) {
+    if (activeEventIndex.value > 0) {
       activeEventIndex.value--
     }
   }
 }
 
 onMounted(() => {
-  activeEventIndex.value = 5
+  activeEventIndex.value = 0
 })
 </script>
 
