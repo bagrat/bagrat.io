@@ -1,4 +1,5 @@
-/* color palette from <https://github.com/vuejs/theme> */
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap');
+
 :root {
   --color-main-background: #f0f0f0;
 /*   --vt-c-white: #ffffff; */
@@ -66,7 +67,8 @@ body {
 /*   color: var(--color-text); */
   width: 100%;
   background: var(--color-main-background);
-  font-family: 'Fira Code', sans-serif;
+  font-family: 'Merriweather', serif;
+  font-size: 1em;
   margin: 0 0 0 0;
   padding: 0 0 0 0;
   /* overflow: hidden; */

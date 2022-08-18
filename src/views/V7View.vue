@@ -36,14 +36,12 @@ function handleScroll({ target: container }) {
 
 <style scoped>
 #container {
-  height: 77vh;
+  height: 100vh;
 
   padding-left: 25%;
   padding-right: 25%;
   
-  margin-top: 5%;
-
-  font-size: 0.8em;
+  /* margin-top: 5%; */
 
   overflow: scroll;
   scroll-snap-type: y mandatory;
@@ -69,7 +67,7 @@ function handleScroll({ target: container }) {
 
   display: block;
   margin: auto;  
-  margin-bottom: 3em;
+  margin-bottom: 2em;
   margin-top: 0em;
 }
 
@@ -77,14 +75,14 @@ function handleScroll({ target: container }) {
   --padding-top: 1em;
 
   padding-top: var(--padding-top);
-  /* padding-bottom: 50%; */
 
-  /* min-height: 100%; */
   height: calc(100% - var(--padding-top));
-  /* height: 100%; */
 
   scroll-snap-align: start;
   scroll-snap-stop: always;
+
+  letter-spacing: 0.015em;
+  line-height: 1.3em;
 
   /* DEBUG */
   /* border: dashed 1px black; */
