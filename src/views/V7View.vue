@@ -1,17 +1,16 @@
 <script setup>
 import { ref } from 'vue'
 import story from '../story.js'
-
-console.log(story)
+import Timeline from '../components/Timeline.vue'
 
 const activeChapter = ref(0)
 
 function handleScroll({ target: container }) {
-  console.log("--- SCROLL ---")
-  console.log(container.scrollTop)
+  // console.log("--- SCROLL ---")
+  // console.log(container.scrollTop)
 
   activeChapter.value = Array.from(document.querySelectorAll("#container .chapter")).map((chapterElement, index) => {
-    const elementScrolledPosition = chapterElement.offsetTop - container.scrollTop
+    const elementScrolledPosition = Math.floor(chapterElement.offsetTop) - Math.floor(container.scrollTop)
     const isCurrent = elementScrolledPosition >= 0 && elementScrolledPosition < container.offsetHeight
 
     return {isCurrent, index}
@@ -23,25 +22,40 @@ function handleScroll({ target: container }) {
 </script>
 
 <template>
-  <div id="container" @scroll="handleScroll">
-    <div class="chapter" v-for="chapter, index in story" :class="{'visible': activeChapter === index, 'invisible': activeChapter !== index}">
-      <h3>{{ chapter.title }}</h3>
-      <img v-if="chapter.image" :src="chapter.image">
-      <p v-for="paragraph in chapter.paragraphs">
-        {{ paragraph }}
-      </p>
+  <transition>
+    <div id="container">
+      <div id="story-screen" @scroll="handleScroll">
+        <div class="chapter" v-for="chapter, index in story" :class="{'visible': activeChapter === index, 'invisible': activeChapter !== index}">
+          <h3>{{ chapter.title }}</h3>
+          <img v-if="chapter.image" :src="chapter.image">
+          <p v-for="paragraph in chapter.paragraphs">
+            {{ paragraph }}
+          </p>
+        </div>
+      </div>
+      <Timeline :height="10" :activeIndex="activeChapter" :numOfMarkers="story.length"/>
     </div>
-  </div>
+  </transition>
 </template>
 
 <style scoped>
 #container {
   height: 100vh;
+  padding-top: 2rem;
 
   padding-left: 25%;
   padding-right: 25%;
-  
-  /* margin-top: 5%; */
+}
+
+#container.v-enter-from {
+  opacity: 0;
+}
+#container.v-enter-active {
+  transition: opacity 0.5s ease;
+}
+
+#story-screen {
+  height: 85%;
 
   overflow: scroll;
   scroll-snap-type: y mandatory;
@@ -49,11 +63,13 @@ function handleScroll({ target: container }) {
   -ms-overflow-style: none;
   scrollbar-width: none;
 
+  margin-bottom: 2em;
+
   /* DEBUG */
   /* border: dashed 1px black; */
 }
 
-#container::-webkit-scrollbar {
+#story-screen::-webkit-scrollbar {
   display: none;
 }
 
@@ -67,7 +83,7 @@ function handleScroll({ target: container }) {
 
   display: block;
   margin: auto;  
-  margin-bottom: 2em;
+  margin-bottom: 2.5em;
   margin-top: 0em;
 }
 
@@ -86,6 +102,10 @@ function handleScroll({ target: container }) {
 
   /* DEBUG */
   /* border: dashed 1px black; */
+}
+
+.chapter p {
+  padding-top: 0.3em;
 }
 
 .chapter.visible {
