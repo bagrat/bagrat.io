@@ -61,7 +61,7 @@ export default [
     image: "/init.gif",
     paragraphs: [
       'In 2015, what started as a relocation-desire-driven job search, ended Bagrat landing his first remote job at Sauce Labs that was building a cloud service to run Selenium tests on different browser and OS combinations.',
-      'Bagrat had his most dense experience at Sauce Labs, where he used asynchronous Python extensively to implement rate-limiting and caching for the REST API, build complex CI pipelines for testing and deployment to K8s, learning Golang along the way to develop new microservices and instrumenting code and building monitoring dashboards and runbooks to make the on-call rotation experience smoother.',
+      'Bagrat had his most dense experience at Sauce Labs, where he used asynchronous Python extensively to implement rate-limiting and caching for the REST API, built complex CI pipelines for testing and deployment to K8s, learnt Golang along the way to develop new microservices and instrumented code to build monitoring dashboards and runbooks so that on-call rotation experience becomes smoother.',
     ],
   },
   {

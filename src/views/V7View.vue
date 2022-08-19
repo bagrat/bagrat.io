@@ -7,8 +7,8 @@ const activeChapter = ref(0)
 
 function handleScroll({ target: container }) {
   activeChapter.value = Array.from(document.querySelectorAll("#container .chapter")).map((chapterElement, index) => {
-    const elementScrolledPosition = Math.floor(chapterElement.offsetTop) - Math.floor(container.scrollTop)
-    const isCurrent = elementScrolledPosition >= -(chapterElement.offsetHeight / 2) && elementScrolledPosition < container.offsetHeight
+    const chapterRelativePosition = Math.floor(chapterElement.offsetTop) - Math.floor(container.scrollTop)
+    const isCurrent = chapterRelativePosition >= -(chapterElement.offsetHeight / 2) && chapterRelativePosition < container.offsetHeight
 
     return {isCurrent, index}
   }).filter(({isCurrent}) => isCurrent)[0]?.index
