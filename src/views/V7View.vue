@@ -17,15 +17,12 @@ function handleScroll({ target: container }) {
 </script>
 
 <template>
-  <transition>
     <div id="container">
       <div id="story-screen" @scroll="handleScroll">
         <div class="chapter" v-for="chapter, index in story" :class="{'visible': activeChapter === index, 'invisible': activeChapter !== index}">
           <h3>{{ chapter.title }}</h3>
           <img v-if="chapter.image" :src="chapter.image">
-          <p v-for="paragraph in chapter.paragraphs">
-            {{ paragraph }}
-          </p>
+          <p v-for="paragraph in chapter.paragraphs" v-html="paragraph"></p>
           <template v-if="index === story.length - 1">
             <p style="text-align: center">***</p>
             <p>Interested in making this version of the future happen? Yes/No</p>
@@ -34,7 +31,6 @@ function handleScroll({ target: container }) {
       </div>
       <ProgressBar :height="10" :progress="activeChapter" :numOfSteps="story.length"/>
     </div>
-  </transition>
 </template>
 
 <style scoped>
@@ -56,9 +52,6 @@ function handleScroll({ target: container }) {
   scrollbar-width: none;
 
   margin-bottom: 2em;
-
-  /* DEBUG */
-  /* border: dashed 1px black; */
 }
 
 #story-screen::-webkit-scrollbar {
@@ -91,9 +84,6 @@ function handleScroll({ target: container }) {
 
   letter-spacing: 0.015em;
   line-height: 1.3em;
-
-  /* DEBUG */
-  /* border: dashed 1px black; */
 }
 
 .chapter p {

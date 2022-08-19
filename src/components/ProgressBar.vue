@@ -35,8 +35,8 @@ const highlightWidth = computed(() => {
 })
 
 const cssVars = {
-  '--inactive-color': '#d6d6d6',
-  '--active-color': '#525252',
+  '--inactive-color': 'var(--color-base-1)',
+  '--active-color': 'var(--color-base-3)',
   '--active-scale-factor': activeScaleFactor,
   '--marker-diameter': `${markerDiameter}px`,
   '--marker-radius': `${markerDiameter / 2}px`,
