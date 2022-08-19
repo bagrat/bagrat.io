@@ -98,7 +98,6 @@ export default [
     paragraphs: [
       'Sometime in August 2022 a V7 team member clicked this link to book a call with Bagrat. After an enjoyable interview process it was concluded that V7 and Bagrat are a great match, thus he got a job offer.',
       'Bagrat gladly accepted the offer and became a happy member of V7 team, working as a full-stack engineer and occasionally helping with Darwin-py.',
-      'Interested in making this version of the future happen? Yes/No',
     ],
   },
 ]

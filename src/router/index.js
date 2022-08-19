@@ -1,15 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import EngView from '../views/EngView.vue'
 import V7View from '../views/V7View.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    // {
-    //   path: '/',
-    //   name: 'engineer-profile',
-    //   component: EngView,
-    // },
     {
       path: '/v7',
       name: 'v7-story',

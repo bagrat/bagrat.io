@@ -2,36 +2,36 @@
 import { onMounted, onUnmounted, onUpdated, defineProps, ref, computed } from 'vue'
 
 const props = defineProps({
-  activeIndex: Number,
-  numOfMarkers: Number,
+  progress: Number,
+  numOfSteps: Number,
   height: Number,
 })
 
-const { height, numOfMarkers } = props
+const { height, numOfSteps } = props
 
-const activeIndex = computed(() => props.activeIndex)
-let previousIndex = activeIndex.value - 1
+const progress = computed(() => props.progress)
+let previousIndex = progress.value - 1
 const containerElement = ref(null)
 const width = ref(0)
 
-const axisHeight = height / 3;
 const markerDiameter = height;
+const axisHeight = height / 3;
 const activeScaleFactor = 1.3;
+const markerSpacing = computed(() => width.value / numOfSteps)
 const containerPaddingTop = (markerDiameter * (activeScaleFactor - 1)) / 2;
-const markerSpacing = computed(() => width.value / numOfMarkers)
 
 const markers = computed(() => {
-  return Array(numOfMarkers).fill({}).map((_, index) => {
+  return Array(numOfSteps).fill({}).map((_, index) => {
     return {
-      isActive: index === activeIndex.value,
-      hasElapsed: index < activeIndex.value,
+      isActive: index === progress.value,
+      hasElapsed: index < progress.value,
       isPrevious: index === previousIndex,
     }
   })
 })
 
 const highlightWidth = computed(() => {
-  return activeIndex.value * markerSpacing.value + markerSpacing.value / 2
+  return progress.value * markerSpacing.value + markerSpacing.value / 2
 })
 
 const cssVars = {
@@ -62,13 +62,12 @@ onUnmounted(() => {
 
 onUpdated(() => {
   inferWidth()
-  previousIndex = activeIndex.value
-  console.log(highlightWidth)
+  previousIndex = progress.value
 })
 </script>
 
 <template>
-  <div id="timeline-container" ref="containerElement" :style="cssVars">
+  <div id="progress-bar-container" ref="containerElement" :style="cssVars">
     <div id="axis"></div>
     <div id="axis-highlight" :style="{'width': `${highlightWidth}px`}"></div>
     <ul id="markers">
@@ -86,7 +85,7 @@ onUpdated(() => {
 </template>
 
 <style scoped>
-#timeline-container {
+#progress-bar-container {
   display: flex;
   flex-direction: column;
   padding-top: var(--container-padding-top);

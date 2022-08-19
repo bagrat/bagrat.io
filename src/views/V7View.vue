@@ -1,22 +1,17 @@
 <script setup>
 import { ref } from 'vue'
 import story from '../story.js'
-import Timeline from '../components/Timeline.vue'
+import ProgressBar from '../components/ProgressBar.vue'
 
 const activeChapter = ref(0)
 
 function handleScroll({ target: container }) {
-  // console.log("--- SCROLL ---")
-  // console.log(container.scrollTop)
-
   activeChapter.value = Array.from(document.querySelectorAll("#container .chapter")).map((chapterElement, index) => {
     const elementScrolledPosition = Math.floor(chapterElement.offsetTop) - Math.floor(container.scrollTop)
-    const isCurrent = elementScrolledPosition >= 0 && elementScrolledPosition < container.offsetHeight
+    const isCurrent = elementScrolledPosition >= -(chapterElement.offsetHeight / 2) && elementScrolledPosition < container.offsetHeight
 
     return {isCurrent, index}
   }).filter(({isCurrent}) => isCurrent)[0]?.index
-  
-  console.log(activeChapter)
 }
 
 </script>
@@ -31,9 +26,13 @@ function handleScroll({ target: container }) {
           <p v-for="paragraph in chapter.paragraphs">
             {{ paragraph }}
           </p>
+          <template v-if="index === story.length - 1">
+            <p style="text-align: center">***</p>
+            <p>Interested in making this version of the future happen? Yes/No</p>
+          </template>
         </div>
       </div>
-      <Timeline :height="10" :activeIndex="activeChapter" :numOfMarkers="story.length"/>
+      <ProgressBar :height="10" :progress="activeChapter" :numOfSteps="story.length"/>
     </div>
   </transition>
 </template>
@@ -45,13 +44,6 @@ function handleScroll({ target: container }) {
 
   padding-left: 25%;
   padding-right: 25%;
-}
-
-#container.v-enter-from {
-  opacity: 0;
-}
-#container.v-enter-active {
-  transition: opacity 0.5s ease;
 }
 
 #story-screen {
