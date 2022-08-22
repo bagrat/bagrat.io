@@ -23,6 +23,12 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Copy CNAME
+        run: cp CNAME dist/CNAME
+
+      - name: Add 404.html
+        run: cp dist/index.html dist/404.html
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
