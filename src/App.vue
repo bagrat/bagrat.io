@@ -1,15 +1,13 @@
 <script setup>
-import { RouterView } from 'vue-router'
+import { RouterView } from "vue-router";
 </script>
 
 <template>
-
-<router-view v-slot="{ Component }">
-  <transition name="fade" appear>
-    <component :is="Component" />
-  </transition>
-</router-view>
-
+  <router-view v-slot="{ Component }">
+    <transition name="fade" appear>
+      <component :is="Component" />
+    </transition>
+  </router-view>
 </template>
 
 <style scoped>

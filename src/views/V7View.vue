@@ -1,29 +1,47 @@
 <script setup>
-import { ref } from 'vue'
-import story from '../story.js'
-import ProgressBar from '../components/ProgressBar.vue'
+import { ref } from "vue";
+import story from "../story.js";
+import ProgressBar from "../components/ProgressBar.vue";
 
-const activeChapter = ref(0)
+const activeChapter = ref(0);
 
 function handleScroll({ target: container }) {
-  activeChapter.value = Array.from(document.querySelectorAll("#container .chapter")).map((chapterElement, index) => {
-    const chapterRelativePosition = Math.floor(chapterElement.offsetTop) - Math.floor(container.scrollTop)
-    const isCurrent = chapterRelativePosition >= -(chapterElement.offsetHeight / 2) && chapterRelativePosition < container.offsetHeight
+  activeChapter.value = Array.from(
+    document.querySelectorAll("#container .chapter")
+  )
+    .map((chapterElement, index) => {
+      const chapterRelativePosition =
+        Math.floor(chapterElement.offsetTop) - Math.floor(container.scrollTop);
+      const isCurrent =
+        chapterRelativePosition >= -(chapterElement.offsetHeight / 2) &&
+        chapterRelativePosition < container.offsetHeight;
 
-    return {isCurrent, index}
-  }).filter(({isCurrent}) => isCurrent)[0]?.index
+      return { isCurrent, index };
+    })
+    .filter(({ isCurrent }) => isCurrent)[0]?.index;
 }
-
 </script>
 
 <template>
   <div id="container">
     <div id="story-screen" @scroll="handleScroll">
-      <div class="chapter" v-for="chapter, index in story" :class="{'visible': activeChapter === index, 'invisible': activeChapter !== index}">
+      <div
+        class="chapter"
+        v-for="(chapter, index) in story"
+        :class="{
+          visible: activeChapter === index,
+          invisible: activeChapter !== index,
+        }"
+        :key="`chapter-${index}`"
+      >
         <h3>{{ chapter.title }}</h3>
         <h4 v-if="chapter.subtitle" v-html="chapter.subtitle"></h4>
-        <img v-if="chapter.image" :src="chapter.image">
-        <p v-for="paragraph in chapter.paragraphs" v-html="paragraph"></p>
+        <img v-if="chapter.image" :src="chapter.image" />
+        <p
+          v-for="(paragraph, p_index) in chapter.paragraphs"
+          v-html="paragraph"
+          :key="`paragraph-${index}-${p_index}`"
+        ></p>
         <template v-if="index === story.length - 1">
           <div id="appointment">
             <p style="text-align: center">***</p>
@@ -33,7 +51,11 @@ function handleScroll({ target: container }) {
         </template>
       </div>
     </div>
-    <ProgressBar :height="10" :progress="activeChapter" :numOfSteps="story.length"/>
+    <ProgressBar
+      :height="10"
+      :progress="activeChapter"
+      :numOfSteps="story.length"
+    />
   </div>
 </template>
 
@@ -77,7 +99,7 @@ function handleScroll({ target: container }) {
   width: 10em;
 
   display: block;
-  margin: auto;  
+  margin: auto;
   margin-bottom: 2.5em;
   margin-top: 0em;
 }
