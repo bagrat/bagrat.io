@@ -1,0 +1,37 @@
+@import "./base.css";
+
+body {
+  --color-main-background: var(--color-base-0);
+  --color-main-text: var(--color-base-4);
+
+  background: var(--color-main-background);
+
+  font-family: 'Noto Sans', serif;
+
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+
+  color: var(--color-main-text);
+}
+
+em {
+  color: var(--color-base-5);
+}
+
+strike {
+  color: var(--color-base-2);
+}
+
+a {
+  transition: color 0.3s ease;
+  color: var(--color-main-text)
+}
+
+a:hover {
+  transition: color 0.3s ease;
+  color: var(--color-base-3)
+}
+
+#app {
+  width: 100%;
+}

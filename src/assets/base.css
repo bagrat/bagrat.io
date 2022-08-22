@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+
+:root {
+  --color-base-0: #eeeeee;
+  --color-base-1: #cccccc;
+  --color-base-2: #999999;
+  --color-base-3: #666666;
+  --color-base-4: #333333;
+  --color-base-5: #000000;
+}
