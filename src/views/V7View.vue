@@ -21,6 +21,7 @@ function handleScroll({ target: container }) {
       <div id="story-screen" @scroll="handleScroll">
         <div class="chapter" v-for="chapter, index in story" :class="{'visible': activeChapter === index, 'invisible': activeChapter !== index}">
           <h3>{{ chapter.title }}</h3>
+          <h4 v-if="chapter.subtitle" v-html="chapter.subtitle"></h4>
           <img v-if="chapter.image" :src="chapter.image">
           <p v-for="paragraph in chapter.paragraphs" v-html="paragraph"></p>
           <template v-if="index === story.length - 1">
@@ -60,6 +61,12 @@ function handleScroll({ target: container }) {
 
 .chapter h3 {
   text-align: center;
+}
+
+.chapter h4 {
+  text-align: center;
+  margin-top: -2.5em;
+  font-size: 0.4em;
 }
 
 .chapter img {
