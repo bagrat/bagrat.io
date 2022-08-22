@@ -30,11 +30,13 @@ jobs:
       - name: Add 404.html
         run: cp dist/index.html dist/404.html
 
+      - name: Disable Jekyll
+        run: touch dist/.nojekyll
+
       - name: DEBUG
         run: pwd && ls -la
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Deploy to Github Pages
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: dist
+          folder: dist
