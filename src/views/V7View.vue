@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
-import story from "../story.js";
-import ProgressBar from "../components/ProgressBar.vue";
+import story from "@/story.js";
+import ProgressBar from "@/components/ProgressBar.vue";
 
 const activeChapter = ref(0);
 
