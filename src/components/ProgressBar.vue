@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, onUnmounted, onUpdated, defineProps, ref, computed } from 'vue'
+import { onMounted, onUnmounted, onUpdated, ref, computed } from 'vue'
 
 const props = defineProps({
   progress: Number,
