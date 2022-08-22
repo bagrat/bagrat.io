@@ -1,7 +1,7 @@
 export default [
   {
     title: "Init",
-    image: "/init.gif",
+    image: "/init-480.gif",
     paragraphs: [
       'At some point in time, for whatever time is, symbolically denoted as 1991, a lump of organic matter constituting a life-form has been manifested and bound by gravity to a muddy sphere that is called Earth by the same kind of cellular beings called humans. A combination of letters, a nifty abstract invention by the same organic kind, was attached to this new one by the biological creators of that being, commonly referred to as parents, in order to reduce the issues of identification in organized groups of humans called society. This combination of letters is called "a name" and the name is Bagrat (<em>bug-rut</em>, emphasis on <em>"rut"</em>, fortunately not on <em>"bug"</em>).',
       'Before this Bagrat would disintegrate in an evolutionary cycle of being eaten and pooped by other organic systems, it voluntarily desired to join the V7 Labs team. In doing so, he made this web-site with the modest expectation that it will be viewed by other human beings who have enough association with V7 Labs that grants them power to arrange an interview.',
@@ -60,7 +60,7 @@ export default [
   {
     title: "Scaling Further",
     subtitle: "or how I learned to stop worrying and loved remote work",
-    image: "/init.gif",
+    image: "/remote-480.gif",
     paragraphs: [
       'In 2015, what started as a relocation-desire-driven job search, ended Bagrat landing his first remote job at <a href="https://saucelabs.com/">Sauce Labs</a> building a cloud service to run <a href="https://www.selenium.dev/">Selenium</a> tests on different browser and OS combinations.',
       'Bagrat had his most dense experience at Sauce Labs, where he used asynchronous Python extensively to implement rate-limiting and caching for the REST API, built complex CI pipelines for testing and deployment to Kubernetes, learnt Golang along the way to develop new microservices and instrumented code to build monitoring dashboards and runbooks so that on-call rotation experience becomes smoother.',

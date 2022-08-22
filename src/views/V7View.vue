@@ -17,24 +17,24 @@ function handleScroll({ target: container }) {
 </script>
 
 <template>
-    <div id="container">
-      <div id="story-screen" @scroll="handleScroll">
-        <div class="chapter" v-for="chapter, index in story" :class="{'visible': activeChapter === index, 'invisible': activeChapter !== index}">
-          <h3>{{ chapter.title }}</h3>
-          <h4 v-if="chapter.subtitle" v-html="chapter.subtitle"></h4>
-          <img v-if="chapter.image" :src="chapter.image">
-          <p v-for="paragraph in chapter.paragraphs" v-html="paragraph"></p>
-          <template v-if="index === story.length - 1">
-            <div id="appointment">
-              <p style="text-align: center">***</p>
-              <p>Interested in making this version of the future happen?</p>
-              <p><a href="https://savvycal.com/bagrat/v7">Book a call</a></p>
-            </div>
-          </template>
-        </div>
+  <div id="container">
+    <div id="story-screen" @scroll="handleScroll">
+      <div class="chapter" v-for="chapter, index in story" :class="{'visible': activeChapter === index, 'invisible': activeChapter !== index}">
+        <h3>{{ chapter.title }}</h3>
+        <h4 v-if="chapter.subtitle" v-html="chapter.subtitle"></h4>
+        <img v-if="chapter.image" :src="chapter.image">
+        <p v-for="paragraph in chapter.paragraphs" v-html="paragraph"></p>
+        <template v-if="index === story.length - 1">
+          <div id="appointment">
+            <p style="text-align: center">***</p>
+            <p>Interested in making this version of the future happen?</p>
+            <p><a href="https://savvycal.com/bagrat/v7">Book a call</a></p>
+          </div>
+        </template>
       </div>
-      <ProgressBar :height="10" :progress="activeChapter" :numOfSteps="story.length"/>
     </div>
+    <ProgressBar :height="10" :progress="activeChapter" :numOfSteps="story.length"/>
+  </div>
 </template>
 
 <style scoped>
@@ -93,7 +93,7 @@ function handleScroll({ target: container }) {
   scroll-snap-stop: always;
 
   letter-spacing: 0.015em;
-  line-height: 1.3em;
+  line-height: 1.4em;
 }
 
 .chapter p {
@@ -121,16 +121,18 @@ function handleScroll({ target: container }) {
 }
 
 #appointment a {
+  display: inline-block;
   text-decoration: none;
   border: 1px solid var(--color-base-3);
   border-radius: 6px;
   background-color: #dedede;
   transition: background-color 0.3s ease;
   padding: 0.5em 1em 0.5em 1em;
-  margin-top: 4em;
+  font-size: 1.1em;
+  margin-top: 0.3em;
 }
+
 #appointment a:hover {
-  /* color: var(--color-text); */
   background-color: var(--color-base-0);
   transition: background-color 0.3s ease;
 }
