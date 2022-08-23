@@ -37,7 +37,7 @@ export default [
     ],
   },
   {
-    title: "Bottom-up",
+    title: "Bottom-Up",
     image: "/bottom-up-480.gif",
     paragraphs: [
       "In 2012 Bagrat graduated with a Physics bachelor's degree and started master's degree in Computer and Information Science. At the same time he landed a new job as a Java back-end developer for a <a href=\"https://www.be2.com/\">matchmaking website company</a>.",
@@ -77,7 +77,7 @@ export default [
     ],
   },
   {
-    title: "One of the two hard problems",
+    title: "One of The Two Hard Problems",
     image: "/naming-480.gif",
     paragraphs: [
       "After 5 years at Sauce Labs, Bagrat's former manager offered a job in a corporate lunch delivery company which needed to update some legacy software written in JavaScript to adapt to new circumstances created by COVID.",
@@ -95,7 +95,7 @@ export default [
     ],
   },
   {
-    title: "Recursive future",
+    title: "Recursive Future",
     image: "/v7-bagrat-480.gif",
     paragraphs: [
       "Sometime in August 2022 the V7 team arranged calls with Bagrat. After an enjoyable interview process it was concluded that V7 and Bagrat are a great match, thus he got a job offer.",
