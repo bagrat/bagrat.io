@@ -54,7 +54,7 @@ function handleScroll({ target: container }) {
     <div class="progress-bar">
       <ProgressBar
         class="progress-bar"
-        :height="10"
+        :width="10"
         :progress="activeChapter"
         :numOfSteps="story.length"
       />
@@ -70,8 +70,15 @@ function handleScroll({ target: container }) {
 
 #story-screen {
   overflow: scroll;
+  outline: none;
 
   transition: padding 0.3s ease;
+}
+
+.progress-bar * {
+  position: fixed;
+  right: 3rem;
+  top: 0;
 }
 
 @media screen and (max-width: 800px), (max-height: 720px) {

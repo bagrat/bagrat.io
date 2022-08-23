@@ -4,19 +4,19 @@ import { onMounted, onUnmounted, onUpdated, ref, computed } from "vue";
 const props = defineProps({
   progress: Number,
   numOfSteps: Number,
-  height: Number,
+  width: Number,
 });
 
 const progress = computed(() => props.progress);
 let previousIndex = progress.value - 1;
 const containerElement = ref(null);
-const width = ref(0);
+const height = ref(0);
 
-const markerDiameter = computed(() => props.height);
-const axisHeight = computed(() => markerDiameter.value / 3);
+const markerDiameter = computed(() => props.width);
+const axisWidth = computed(() => markerDiameter.value / 3);
 const activeScaleFactor = 1.3;
-const markerSpacing = computed(() => width.value / props.numOfSteps);
-const containerPaddingTop =
+const markerSpacing = computed(() => height.value / props.numOfSteps);
+const containerPaddingLeft =
   (markerDiameter.value * (activeScaleFactor - 1)) / 2;
 
 const markers = computed(() => {
@@ -31,7 +31,7 @@ const markers = computed(() => {
     });
 });
 
-const highlightWidth = computed(() => {
+const highlightHeight = computed(() => {
   return progress.value * markerSpacing.value + markerSpacing.value / 2;
 });
 
@@ -41,28 +41,28 @@ const cssVars = {
   "--active-scale-factor": activeScaleFactor,
   "--marker-diameter": `${markerDiameter.value}px`,
   "--marker-radius": `${markerDiameter.value / 2}px`,
-  "--markers-margin-top": `${-2 * axisHeight.value}px`,
-  "--container-padding-top": `${containerPaddingTop}px`,
-  "--axis-height": `${axisHeight.value}px`,
-  "--axis-margin-top": `${axisHeight.value}px`,
-  "--axis-highlight-margin-top": `${-1 * axisHeight.value}px`,
+  "--markers-margin-top": `${-2 * axisWidth.value}px`,
+  "--container-padding-left": `${containerPaddingLeft}px`,
+  "--axis-width": `${axisWidth.value}px`,
+  "--axis-margin-top": `${axisWidth.value}px`,
+  "--axis-highlight-margin-top": `${-1 * axisWidth.value}px`,
 };
 
-function inferWidth() {
-  width.value = containerElement.value.clientWidth;
+function inferHeight() {
+  height.value = containerElement.value.clientHeight;
 }
 
 onMounted(() => {
-  inferWidth();
-  window.addEventListener("resize", inferWidth);
+  inferHeight();
+  window.addEventListener("resize", inferHeight);
 });
 
 onUnmounted(() => {
-  window.removeEventListener("resize", inferWidth);
+  window.removeEventListener("resize", inferHeight);
 });
 
 onUpdated(() => {
-  inferWidth();
+  inferHeight();
   previousIndex = progress.value;
 });
 </script>
@@ -70,7 +70,7 @@ onUpdated(() => {
 <template>
   <div id="progress-bar-container" ref="containerElement" :style="cssVars">
     <div id="axis"></div>
-    <div id="axis-highlight" :style="{ width: `${highlightWidth}px` }"></div>
+    <div id="axis-highlight" :style="{ height: `${highlightHeight}px` }"></div>
     <ul id="markers">
       <li v-for="(marker, index) in markers" :key="`marker-${index}`">
         <div
@@ -88,18 +88,18 @@ onUpdated(() => {
 
 <style scoped>
 #progress-bar-container {
-  max-width: 100%;
-  width: 100%;
+  max-height: 100%;
+  height: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   padding-top: var(--container-padding-top);
 }
 
 #axis {
   background-color: var(--inactive-color);
-  width: 100%;
-  height: var(--axis-height);
-  margin-top: var(--axis-margin-top);
+  height: 100%;
+  width: var(--axis-width);
+  margin-left: var(--axis-margin-top);
   border-radius: 3px;
 
   z-index: -10;
@@ -107,34 +107,34 @@ onUpdated(() => {
 
 #axis-highlight {
   background-color: var(--active-color);
-  height: var(--axis-height);
-  margin-top: var(--axis-highlight-margin-top);
+  width: var(--axis-width);
+  margin-left: var(--axis-highlight-margin-top);
 
   border-radius: 3px;
 
   z-index: -5;
 
-  transition-property: width;
+  transition-property: height;
   transition-duration: 0.4s;
   transition-delay: 0.1s;
 }
 
 ul#markers {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-around;
   align-items: stretch;
-  width: 100%;
+  height: 100%;
 
   margin: 0 0 0 0;
   padding: 0 0 0 0;
   z-index: 0;
-  margin-top: var(--markers-margin-top);
+  margin-left: var(--markers-margin-top);
 }
 
 ul#markers > li {
   list-style-type: none;
-  max-width: var(--marker-diameter);
+  max-height: var(--marker-diameter);
   flex-direction: column;
 }
 
@@ -142,8 +142,8 @@ ul#markers > li {
   margin: 0 0 0 0;
   background-color: var(--inactive-color);
 
-  width: var(--marker-diameter);
   height: var(--marker-diameter);
+  width: var(--marker-diameter);
   border-radius: var(--marker-radius);
 }
 
