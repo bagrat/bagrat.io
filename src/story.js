@@ -4,7 +4,7 @@ export default [
     image: "/init-480.gif",
     paragraphs: [
       'This is a <strike>short</strike> story about Bagrat (<em>bug-rut</em>, emphasis on <em>"rut"</em>, fortunately not on <em>"bug"</em>) as a programmer. It attempts to reveal more than a resume could.',
-      'It is intended to demonstrate <em>"a proven interest in computer science from a young age"</em>, thus it goes back to when Bagrat had his first encounters with actual computers. And since that was more than 18 years ago, it is written with a modest hope that <strong>V7 Labs</strong> team will take the time read to through it all.',
+      'It is intended to demonstrate <em>"a proven interest in computer science from a young age"</em>, thus it goes back to when Bagrat had his first encounters with actual computers. And since that was more than 18 years ago, it is written with a modest hope that <strong>V7 Labs</strong> team will take the time to read through it all.',
       'With that said, please scroll down to get the story going!',
     ],
   },
