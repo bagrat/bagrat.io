@@ -29,8 +29,8 @@ function handleScroll({ target: container }) {
         class="chapter"
         v-for="(chapter, index) in story"
         :class="{
-          visible: activeChapter === index,
-          invisible: activeChapter !== index,
+          active: activeChapter === index,
+          inactive: activeChapter !== index,
         }"
         :key="`chapter-${index}`"
       >
@@ -51,37 +51,100 @@ function handleScroll({ target: container }) {
         </template>
       </div>
     </div>
-    <ProgressBar
-      :height="10"
-      :progress="activeChapter"
-      :numOfSteps="story.length"
-    />
+    <div class="progress-bar">
+      <ProgressBar
+        class="progress-bar"
+        :height="10"
+        :progress="activeChapter"
+        :numOfSteps="story.length"
+      />
+    </div>
   </div>
 </template>
 
 <style scoped>
 #container {
-  height: 100vh;
-  padding-top: 2rem;
-
-  padding-left: 25%;
-  padding-right: 25%;
+  --padding-top: 2rem;
+  padding-top: var(--padding-top);
 }
 
 #story-screen {
-  height: 85%;
-
   overflow: scroll;
-  scroll-snap-type: y mandatory;
 
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-
-  margin-bottom: 2em;
+  transition: padding 0.3s ease;
 }
 
-#story-screen::-webkit-scrollbar {
-  display: none;
+@media screen and (max-width: 800px), (max-height: 720px) {
+  .progress-bar {
+    display: none;
+  }
+
+  #story-screen {
+    height: 100%;
+
+    padding-left: 5%;
+    padding-right: 5%;
+
+    padding-bottom: 10rem;
+  }
+}
+
+@media screen and (min-width: 800px) and (min-height: 720px) {
+  body {
+    overflow: hidden;
+  }
+
+  #story-screen {
+    scroll-snap-type: y mandatory;
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  #story-screen::-webkit-scrollbar {
+    display: none;
+  }
+
+  .chapter {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+
+    height: calc(100% - var(--padding-top));
+  }
+
+  .chapter.active {
+    opacity: 1;
+    transition-property: opacity;
+    transition-duration: 0.7s;
+  }
+
+  .chapter.inactive {
+    opacity: 0;
+    transition-property: opacity;
+    transition-duration: 0.1s;
+  }
+}
+
+@media screen and (min-width: 800px) and (min-height: 720px) {
+  #container {
+    height: calc(100vh - var(--padding-top));
+  }
+
+  #story-screen {
+    height: 90%;
+
+    padding-left: 15%;
+    padding-right: 15%;
+
+    margin-bottom: 3%;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  #story-screen {
+    padding-left: 25%;
+    padding-right: 25%;
+  }
 }
 
 .chapter h3 {
@@ -90,48 +153,32 @@ function handleScroll({ target: container }) {
 
 .chapter h4 {
   text-align: center;
-  margin-top: -2.5em;
-  font-size: 0.4em;
+  margin-top: -1.2rem;
+  font-size: 0.6rem;
 }
 
 .chapter img {
-  height: 10em;
-  width: 10em;
+  height: 10rem;
+  width: 10rem;
 
   display: block;
   margin: auto;
-  margin-bottom: 2.5em;
-  margin-top: 0em;
+  margin-bottom: 2rem;
+  margin-top: 0;
 }
 
 .chapter {
-  --padding-top: 1em;
+  --padding-top: 1rem;
 
   padding-top: var(--padding-top);
 
-  height: calc(100% - var(--padding-top));
 
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-
-  letter-spacing: 0.015em;
-  line-height: 1.4em;
+  letter-spacing: 0.015rem;
+  line-height: 1.4rem;
 }
 
 .chapter p {
-  padding-top: 0.3em;
-}
-
-.chapter.visible {
-  opacity: 1;
-  transition-property: opacity;
-  transition-duration: 0.7s;
-}
-
-.chapter.invisible {
-  opacity: 0;
-  transition-property: opacity;
-  transition-duration: 0.1s;
+  padding-top: 0.1rem;
 }
 
 #appointment p {
@@ -139,7 +186,7 @@ function handleScroll({ target: container }) {
 }
 
 #appointment {
-  margin-top: 3em;
+  margin-top: 3rem;
 }
 
 #appointment a {
@@ -149,9 +196,9 @@ function handleScroll({ target: container }) {
   border-radius: 6px;
   background-color: #dedede;
   transition: background-color 0.3s ease;
-  padding: 0.5em 1em 0.5em 1em;
-  font-size: 1.1em;
-  margin-top: 0.3em;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  font-size: 1.1rem;
+  margin-top: 0.3rem;
 }
 
 #appointment a:hover {

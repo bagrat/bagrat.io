@@ -88,6 +88,8 @@ onUpdated(() => {
 
 <style scoped>
 #progress-bar-container {
+  max-width: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   padding-top: var(--container-padding-top);
