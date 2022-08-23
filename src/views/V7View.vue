@@ -77,7 +77,7 @@ function handleScroll({ target: container }) {
   transition: padding 0.3s ease;
 }
 
-.progress-bar * {
+.progress-bar {
   position: fixed;
   right: 3rem;
   top: 0;
