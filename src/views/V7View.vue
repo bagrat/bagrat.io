@@ -69,6 +69,8 @@ function handleScroll({ target: container }) {
 }
 
 #story-screen {
+  height: 100%;
+
   overflow: scroll;
   outline: none;
 
@@ -87,8 +89,6 @@ function handleScroll({ target: container }) {
   }
 
   #story-screen {
-    height: 100%;
-
     padding-left: 5%;
     padding-right: 5%;
 
@@ -138,12 +138,8 @@ function handleScroll({ target: container }) {
 
 @media screen and (min-width: 800px) and (min-height: 720px) {
   #story-screen {
-    height: 90%;
-
     padding-left: 15%;
     padding-right: 15%;
-
-    margin-bottom: 1rem;
   }
 }
 
@@ -178,7 +174,6 @@ function handleScroll({ target: container }) {
   --padding-top: 1rem;
 
   padding-top: var(--padding-top);
-
 
   letter-spacing: 0.015rem;
   line-height: 1.4rem;
