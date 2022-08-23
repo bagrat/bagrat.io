@@ -94,6 +94,10 @@ function handleScroll({ target: container }) {
     overflow: hidden;
   }
 
+  #container {
+    height: calc(100vh - var(--padding-top));
+  }
+
   #story-screen {
     scroll-snap-type: y mandatory;
 
@@ -126,17 +130,13 @@ function handleScroll({ target: container }) {
 }
 
 @media screen and (min-width: 800px) and (min-height: 720px) {
-  #container {
-    height: calc(100vh - var(--padding-top));
-  }
-
   #story-screen {
     height: 90%;
 
     padding-left: 15%;
     padding-right: 15%;
 
-    margin-bottom: 3%;
+    margin-bottom: 1rem;
   }
 }
 
