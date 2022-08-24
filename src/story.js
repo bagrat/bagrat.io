@@ -52,7 +52,7 @@ export default [
       '<a href="https://www.amazon.com/Thinking-Systems-Donella-H-Meadows/dp/1603580557">© Donella Meadows</a>',
     image: "/systems-480.gif",
     paragraphs: [
-      'After graduating with master\'s degree, Bagrat wanted something new to learn, and by random development of events, it turned out to be Python, which he loved especially for meta-programming abilities. He read all the official tutorials and language reference of Python, but most of his core Python knowledge came from <a href="https://stackoverflow.com/users/3264192/bagrat">answering Stack Overflow questions</a>.',
+      'After graduating with master\'s degree, Bagrat wanted something new to learn, and by random development of events, it turned out to be Python, which he loved especially for meta-programming abilities. He read all the official tutorials and language reference of Python, but most of his core Python knowledge came from <a href="https://stackoverflow.com/users/3264192/bagrat">answering Stack Overflow questions</a> and <a href="https://github.com/bagrat">developing a few Open-Source Projects</a>.',
       'So he landed another job as a Python developer for <a href="https://www.aarki.com/">an advertisement platform</a>. The two most interesting and new aspects Bagrat learnt and dealt with here were system architecture design and configuration management. Most notably, he learnt about HTTP load-balancing, that data storage is not limited to relational databases and that those need to be replicated.',
     ],
   },
