@@ -98,7 +98,7 @@ export default [
     title: "Recursive Future",
     image: "/v7-bagrat-480.gif",
     paragraphs: [
-      "Sometime in August 2022 the V7 team arranged calls with Bagrat. After an enjoyable interview process it was concluded that V7 and Bagrat are a great match, thus he got a job offer.",
+      "Sometime in fall 2022 the V7 team arranged calls with Bagrat. After an enjoyable interview process it was concluded that V7 and Bagrat are a great match, thus he got a job offer.",
       "Bagrat gladly accepted the offer and became a happy member of V7 team, working as a full-stack engineer and occasionally helping with Darwin-py.",
     ],
   },
