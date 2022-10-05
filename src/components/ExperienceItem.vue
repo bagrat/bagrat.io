@@ -1,9 +1,9 @@
 <script setup>
-const { company, range, location } = defineProps({
+defineProps({
   company: String,
   range: String,
   location: String,
-})
+});
 </script>
 
 <template>
@@ -14,7 +14,7 @@ const { company, range, location } = defineProps({
     </div>
     <div class="location" v-html="location"></div>
     <div class="description">
-      <slot/>
+      <slot />
     </div>
   </div>
 </template>

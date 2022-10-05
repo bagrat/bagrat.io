@@ -1,6 +1,6 @@
 <script setup>
-import EducationItem from '@/components/EducationItem.vue'
-import ExperienceItem from '@/components/ExperienceItem.vue'
+import EducationItem from "@/components/EducationItem.vue";
+import ExperienceItem from "@/components/ExperienceItem.vue";
 </script>
 
 <template>
@@ -10,12 +10,13 @@ import ExperienceItem from '@/components/ExperienceItem.vue'
 
       <main>
         <div id="left-column">
-
           <div id="info">
             <div>
               <font-awesome-icon icon="fa-solid fa-location-dot" />
               <span>
-                <a href="https://goo.gl/maps/ux7VvLvrwnphZxX9A">Yerevan, Armenia</a>
+                <a href="https://goo.gl/maps/ux7VvLvrwnphZxX9A"
+                  >Yerevan, Armenia</a
+                >
               </span>
             </div>
             <div>
@@ -75,41 +76,108 @@ import ExperienceItem from '@/components/ExperienceItem.vue'
           <div id="academics">
             <h2>Education</h2>
             <div class="education-items">
-              <EducationItem year="2014" degree="MSc in Computer Science" university="American University of Armenia"/>
-              <EducationItem year="2012" degree="BSc in Physics" university="Yerevan State University"/>
+              <EducationItem
+                year="2014"
+                degree="MSc in Computer Science"
+                university="American University of Armenia"
+              />
+              <EducationItem
+                year="2012"
+                degree="BSc in Physics"
+                university="Yerevan State University"
+              />
             </div>
           </div>
         </div>
 
         <div id="experiences">
-          <h2>Experience</h2>        
+          <h2>Experience</h2>
           <div class="items">
-
-            <ExperienceItem company="Ntropy" range="Sep 2021 - Jul 2022" location="London, UK (worked remotely from Yerevan, Armenia)">
-              Maintained and developed a financial transactions categorization API in Python along with its client library. Implemented properly ordered and fault-tolerant deployment of inter-dependant services onto Kubernetes using Helm and GitHub Actions. Implemented a distributed scraping solution for data gathering through carefully managed VPN IPs.
+            <ExperienceItem
+              company="Ntropy"
+              range="Sep 2021 - Jul 2022"
+              location="London, UK (worked remotely from Yerevan, Armenia)"
+            >
+              Maintained and developed a financial transactions categorization
+              API in Python along with its client library. Implemented properly
+              ordered and fault-tolerant deployment of inter-dependant services
+              onto Kubernetes using Helm and GitHub Actions. Implemented a
+              distributed scraping solution for data gathering through carefully
+              managed VPN IPs.
             </ExperienceItem>
-            <ExperienceItem company="Smunch" range="Sep 2020 - Aug 2021" location="Berlin, Germany (worked remotely from Yerevan, Armenia)">
-              Maintained legacy microservices in Node.js deployed on AWS Lambda via Serverless. Improved CI pipelines to increase confidence and stability of the maintenance and new adjustments. Gathered requirements and architected new software systems for internal operations management.
+            <ExperienceItem
+              company="Smunch"
+              range="Sep 2020 - Aug 2021"
+              location="Berlin, Germany (worked remotely from Yerevan, Armenia)"
+            >
+              Maintained legacy microservices in Node.js deployed on AWS Lambda
+              via Serverless. Improved CI pipelines to increase confidence and
+              stability of the maintenance and new adjustments. Gathered
+              requirements and architected new software systems for internal
+              operations management.
             </ExperienceItem>
-            <ExperienceItem company="Sauce Labs" range="Oct 2015 - Sep 2020" location="San Francisco, USA (worked remotely from Yerevan, Armenia)">
-              Developed and maintained the core services of Sauce Labs mainly using Go and asynchronous Python, deploying on Kubernetes. Participated in on-call rotation for production troubleshooting. Contributed to the CI/CD pipelines. Implemented caching and rate limiting for the API to unload the database. Set up monitoring of services for better insights into system state.
+            <ExperienceItem
+              company="Sauce Labs"
+              range="Oct 2015 - Sep 2020"
+              location="San Francisco, USA (worked remotely from Yerevan, Armenia)"
+            >
+              Developed and maintained the core services of Sauce Labs mainly
+              using Go and asynchronous Python, deploying on Kubernetes.
+              Participated in on-call rotation for production troubleshooting.
+              Contributed to the CI/CD pipelines. Implemented caching and rate
+              limiting for the API to unload the database. Set up monitoring of
+              services for better insights into system state.
             </ExperienceItem>
-            <ExperienceItem company="Aarki" range="Nov 2014 - Oct 2015" location="Yerevan, Armenia">
-              Designed scalable web services for an advertising platform, set up the infrastructure, including CI and configuration management. Developed wrappers/decorators for Python to reduce repeating and routine implementation tasks, which increased development and debugging time by providing more intuitive and clean code.
+            <ExperienceItem
+              company="Aarki"
+              range="Nov 2014 - Oct 2015"
+              location="Yerevan, Armenia"
+            >
+              Designed scalable web services for an advertising platform, set up
+              the infrastructure, including CI and configuration management.
+              Developed wrappers/decorators for Python to reduce repeating and
+              routine implementation tasks, which increased development and
+              debugging time by providing more intuitive and clean code.
             </ExperienceItem>
-            <ExperienceItem company="IU Networks" range="Mar 2013 - Nov 2014" location="Yerevan, Armenia">
-              Designed 3-tier architecture for an e-commerce web service using Java. Organized the CI pipeline, which increased software quality and release processes and decreased development time. Developed base classes for unit testing which eased test coding by initialising and providing all necessary resources. Implemented business logic split into service and data access layers.
+            <ExperienceItem
+              company="IU Networks"
+              range="Mar 2013 - Nov 2014"
+              location="Yerevan, Armenia"
+            >
+              Designed 3-tier architecture for an e-commerce web service using
+              Java. Organized the CI pipeline, which increased software quality
+              and release processes and decreased development time. Developed
+              base classes for unit testing which eased test coding by
+              initialising and providing all necessary resources. Implemented
+              business logic split into service and data access layers.
             </ExperienceItem>
-            <ExperienceItem company="be2" range="Jul 2012 - Mar 2013" location="Yerevan, Armenia">
-              Maintained RESTful Web Services for a matchmaking web application. Improved software development processes by setting up the development environment and writing automation scripts, which increased development productivity. Increased code coverage with unit tests and documentation which improved code readability and decreased build fails.
+            <ExperienceItem
+              company="be2"
+              range="Jul 2012 - Mar 2013"
+              location="Yerevan, Armenia"
+            >
+              Maintained RESTful Web Services for a matchmaking web application.
+              Improved software development processes by setting up the
+              development environment and writing automation scripts, which
+              increased development productivity. Increased code coverage with
+              unit tests and documentation which improved code readability and
+              decreased build fails.
             </ExperienceItem>
-            <ExperienceItem company="Antel Design" range="Feb 2010 - Jul 2012" location="Yerevan, Armenia">
-              Developed a command line interface via RS232 using C language on AVR32 architecture for a proprietary wireless transceiver. Additionally, integrated a third party Wi-Fi module on same platform to enable remote wireless configuration of the radio module. Wrote technical specifications and documentations for each piece of software.
+            <ExperienceItem
+              company="Antel Design"
+              range="Feb 2010 - Jul 2012"
+              location="Yerevan, Armenia"
+            >
+              Developed a command line interface via RS232 using C language on
+              AVR32 architecture for a proprietary wireless transceiver.
+              Additionally, integrated a third party Wi-Fi module on same
+              platform to enable remote wireless configuration of the radio
+              module. Wrote technical specifications and documentations for each
+              piece of software.
             </ExperienceItem>
           </div>
         </div>
       </main>
-
     </div>
   </div>
 </template>

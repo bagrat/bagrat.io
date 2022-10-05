@@ -5,7 +5,7 @@ export default [
     paragraphs: [
       'This is a <strike>short</strike> story about Bagrat (<em>bug-rut</em>, emphasis on <em>"rut"</em>, fortunately not on <em>"bug"</em>) as a programmer. It attempts to reveal more than a resume could.',
       'It is intended to demonstrate <em>"a proven interest in computer science from a young age"</em>, thus it goes back to when Bagrat had his first encounters with actual computers. And since that was more than 18 years ago, it is written with a modest hope that <strong>V7 Labs</strong> team will take the time to read through it all.',
-      'With that said, please scroll down to get the story going!',
+      "With that said, please scroll down to get the story going!",
     ],
   },
   {
@@ -13,8 +13,8 @@ export default [
     image: "/hello-computer-480.gif",
     paragraphs: [
       "Bagrat was 12 when a computer appeared at their home, a moderate PC enough for his mother to carry home some programming work. He watched her write weird text in Visual Basic that would make windows and buttons do some meaningful stuff.",
-      'Over time, patterns emerged in Bagrat\'s mind, motivating him to get a hand or two dirty. With his very basic knowledge of Basic and an idea from the future informatics teacher he wrote a program that would speak out a word and expect it to be written into a textbox to be spellchecked. This won him a waiver from the upcoming Pascal classes in the 8th grade, so he used this free time to learn C/C++ to later be used in programming olympiads.',
-      'The same summer, Bagrat worked in a local electronics store, assembling hundreds of PCs. Once he attempted to insert a RAM the other way around, and feeling resistance he applied more force, breaking it along with the motherboard socket. He realized that a need for brute force usually indicates faulty approach in the first place.'
+      "Over time, patterns emerged in Bagrat's mind, motivating him to get a hand or two dirty. With his very basic knowledge of Basic and an idea from the future informatics teacher he wrote a program that would speak out a word and expect it to be written into a textbox to be spellchecked. This won him a waiver from the upcoming Pascal classes in the 8th grade, so he used this free time to learn C/C++ to later be used in programming olympiads.",
+      "The same summer, Bagrat worked in a local electronics store, assembling hundreds of PCs. Once he attempted to insert a RAM the other way around, and feeling resistance he applied more force, breaking it along with the motherboard socket. He realized that a need for brute force usually indicates faulty approach in the first place.",
     ],
   },
   {
@@ -81,7 +81,7 @@ export default [
     image: "/naming-480.gif",
     paragraphs: [
       "After 5 years at Sauce Labs, Bagrat's former manager offered a job in a corporate lunch delivery company which needed to update some legacy software written in JavaScript to adapt to new circumstances created by COVID.",
-      'Here he witnessed the most confusing naming of domain concepts. The actual challenge of it though was that after understanding the concepts and thinking in those terms, it was nearly impossible to add new work in that context that would make sense. Being underpowered on staff and having to spend most of the time patching the legacy to keep the critical operations going, he eventually gave up and moved on.',
+      "Here he witnessed the most confusing naming of domain concepts. The actual challenge of it though was that after understanding the concepts and thinking in those terms, it was nearly impossible to add new work in that context that would make sense. Being underpowered on staff and having to spend most of the time patching the legacy to keep the critical operations going, he eventually gave up and moved on.",
       "This taught Bagrat to be generous for the time dedicated to naming, which will pay off in multiples later.",
     ],
   },

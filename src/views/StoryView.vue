@@ -1,8 +1,8 @@
 <script setup>
 import story from "@/story.js";
-import Story from "@/components/Story.vue";
+import StoryScreen from "@/components/StoryScreen.vue";
 </script>
 
 <template>
-  <Story :source="story"></Story>
+  <StoryScreen :source="story" />
 </template>

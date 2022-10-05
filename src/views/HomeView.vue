@@ -2,7 +2,7 @@
 
 <template>
   <div>
-  <span>Looking for something?</span>
+    <span>Looking for something?</span>
   </div>
 </template>
 

@@ -1,10 +1,10 @@
 <script setup>
-const { year, degree, field, university } = defineProps({
+defineProps({
   year: String,
   degree: String,
   field: String,
   university: String,
-})
+});
 </script>
 
 <template>
