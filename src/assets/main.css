@@ -14,6 +14,14 @@ body {
   color: var(--color-main-text);
 }
 
+@media print {
+  body {
+    font-size: 1.22rem;
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+}
+
 em {
   color: var(--color-base-5);
 }

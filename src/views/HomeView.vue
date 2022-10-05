@@ -1,7 +1,16 @@
 <script setup></script>
 
 <template>
-  <div></div>
+  <div>
+  <span>Looking for something?</span>
+  </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+div {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>
