@@ -3,7 +3,8 @@ export default [
     title: "Init",
     image: "/init-480.gif",
     paragraphs: [
-      'This is a <strike>short</strike> story about Bagrat (<em>bug-rut</em>, emphasis on <em>"rut"</em>, fortunately not on <em>"bug"</em>) as a programmer. It attempts to reveal more than a resume could, thus it goes back to when he had his first encounters with actual computers.',
+      'This is a <strike>short</strike> story about Bagrat (<em>bug-rut</em>, emphasis on <em>"rut"</em>, fortunately not on <em>"bug"</em>) as a programmer. It attempts to reveal more than a resume could.',
+      'It is intended to demonstrate <em>"a proven interest in computer science from a young age"</em>, thus it goes back to when Bagrat had his first encounters with actual computers. And since that was more than 18 years ago, it is written with a modest hope that <strong>V7 Labs</strong> team will take the time to read through it all.',
       'With that said, please scroll down to get the story going!',
     ],
   },
@@ -85,12 +86,20 @@ export default [
     ],
   },
   {
-    title: "Coda",
+    title: "Almost Coda",
     image: "/coda-480.gif",
     paragraphs: [
       'In 2021, Bagrat got approached by a recruiter pitching a position in a <a href="https://ntropy.com/">fintech ML company</a>. Having an interest working on a ML project and finding the <a href="https://github.com/bagrat/nsync">coding challenge</a> very interesting he accepted the job offer.',
       "It would not take too long for Bagrat to be assigned to work he was not curious about - scraping. Even though he tried to make it somewhat interesting and less stressful through heavy testing it didn't last long.",
-      'It was now time to take a break and find an interesting Elixir job...',
+      'It was now time to take a break and find an interesting Elixir job. He accidentally came across <a href="https://elixir-lang.org/blog/2021/01/13/orchestrating-computer-vision-with-elixir-at-v7/">V7 in the Elixir blog</a>. Finding the product and the company very appealing for many reasons there was nothing stopping him from applying other than learning Vue.js and <a href="https://github.com/bagrat/bagrat.io">making this very website</a>. And so he did.',
+    ],
+  },
+  {
+    title: "Recursive Future",
+    image: "/v7-bagrat-480.gif",
+    paragraphs: [
+      "Sometime in fall 2022 the V7 team arranged calls with Bagrat. After an enjoyable interview process it was concluded that V7 and Bagrat are a great match, thus he got a job offer.",
+      "Bagrat gladly accepted the offer and became a happy member of V7 team, working as a full-stack engineer and occasionally helping with Darwin-py.",
     ],
   },
 ];

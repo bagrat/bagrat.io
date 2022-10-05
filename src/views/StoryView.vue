@@ -1,8 +1,8 @@
 <script setup>
-import v7story from "@/v7story.js";
+import story from "@/story.js";
 import Story from "@/components/Story.vue";
 </script>
 
 <template>
-  <Story :source="v7story" :bookACall="true"></Story>
+  <Story :source="story"></Story>
 </template>
