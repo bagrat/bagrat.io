@@ -72,7 +72,7 @@ export default [
       "A senior colleague of Bagrat's once shared his excitement about this functional language called Elixir. He had a look into it - started to learn without much coding. It didn't go well at first and Bagrat stopped at Sigils.",
       'After reading a few <a href="https://basecamp.com/books">books by Basecamp</a>, he decided to up his skills by learning some web front-end, having in mind to become able to build and ship things end-to-end. Not being a big fan of JavaScript he was looking for an alternative, and that\'s how he stumbled upon Elm.',
       "After some learning and hacking with Elm, Bagrat was feeling a new kind of unexplainable but satisfactory joy, as if he received a brain massage. He quickly realized that it was because of the language being functional, and decided to give Elixir another try.",
-      "The excitement allowed him to go through the language basics pretty quickly this time and reach the OTP part of things soon. This is where Bagrat was amazed and realized there is no going back. So he started to dive deep into Elixir to eventually find a job...",
+      "The excitement allowed him to go through the language basics pretty quickly this time and reach the OTP part of things soon. This is where Bagrat was amazed and started seeing things in a different, more functional way...",
     ],
   },
   {
@@ -90,7 +90,7 @@ export default [
     paragraphs: [
       'In 2021, Bagrat got approached by a recruiter pitching a position in a <a href="https://ntropy.com/">fintech ML company</a>. Having an interest working on a ML project and finding the <a href="https://github.com/bagrat/nsync">coding challenge</a> very interesting he accepted the job offer.',
       "It would not take too long for Bagrat to be assigned to work he was not curious about - scraping. Even though he tried to make it somewhat interesting and less stressful through heavy testing it didn't last long.",
-      "It was now time to take a break and find an interesting Elixir job...",
+      "It was now time to take a break and find a job that would truly excite him. And that's how he ended up here, writing this story for you :)",
     ],
   },
 ];
